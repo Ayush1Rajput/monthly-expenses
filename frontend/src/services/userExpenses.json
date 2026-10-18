@@ -1,0 +1,2182 @@
+[
+  {
+    "_id": "user_7_1_0",
+    "title": "Room Rent",
+    "amount": 7500,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_1_1",
+    "title": "Security",
+    "amount": 1000,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_1_2",
+    "title": "Soap, brush, colgate",
+    "amount": 100,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_2_3",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_3_4",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_4_5",
+    "title": "Sampoo",
+    "amount": 10,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_5_6",
+    "title": "Food (Monu Bhai)",
+    "amount": 210,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-05T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_6_7",
+    "title": "Food + cold drink",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Cold drink craving",
+    "date": "2026-07-06T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_7_8",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-07T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_8_9",
+    "title": "Food",
+    "amount": 140,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_9_10",
+    "title": "Food",
+    "amount": 100,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_9_11",
+    "title": "Press (Iron)",
+    "amount": 460,
+    "category": "Others",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_9_12",
+    "title": "Umbrella",
+    "amount": 200,
+    "category": "Others",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_9_13",
+    "title": "Kale Chana",
+    "amount": 100,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_10_14",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_11_15",
+    "title": "Clip, Soap",
+    "amount": 20,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_11_16",
+    "title": "Medicine",
+    "amount": 20,
+    "category": "Health & Medical",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_12_17",
+    "title": "Photo copy",
+    "amount": 40,
+    "category": "Education",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_12_18",
+    "title": "Pocket file",
+    "amount": 50,
+    "category": "Education",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_13_19",
+    "title": "Travel to TCS",
+    "amount": 182,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-13T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_13_20",
+    "title": "Food",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-13T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_14_21",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_15_22",
+    "title": "Food",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_16_23",
+    "title": "Food + Biscuit",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-16T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_17_24",
+    "title": "Food + Evening breakfast",
+    "amount": 90,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_18_25",
+    "title": "Cold drink",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Cold drink",
+    "date": "2026-07-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_19_26",
+    "title": "Biscuit + soap",
+    "amount": 90,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_19_27",
+    "title": "Navratan oil",
+    "amount": 44,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_19_28",
+    "title": "Chips",
+    "amount": 25,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Packaged chips snack",
+    "date": "2026-07-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_20_29",
+    "title": "Food",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-20T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_21_30",
+    "title": "Food",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-21T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_22_31",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-22T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_23_32",
+    "title": "Food + Candy",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-23T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_24_33",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-24T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_25_34",
+    "title": "Socks",
+    "amount": 40,
+    "category": "Shopping & Clothing",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-25T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_25_35",
+    "title": "Metro + auto",
+    "amount": 72,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-25T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_25_36",
+    "title": "Surf",
+    "amount": 10,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-25T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_27_37",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_27_38",
+    "title": "Talcum powder + soap",
+    "amount": 110,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_28_39",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-28T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_29_40",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-29T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_29_41",
+    "title": "Samosa",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Fried snack craving",
+    "date": "2026-07-29T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_30_42",
+    "title": "Rapido",
+    "amount": 20,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-30T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_30_43",
+    "title": "Samosa",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Fried snack craving",
+    "date": "2026-07-30T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_31_44",
+    "title": "Samosa",
+    "amount": 20,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Fried snack craving",
+    "date": "2026-07-31T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_7_31_45",
+    "title": "Juice / Food",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-07-31T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_1_46",
+    "title": "Power cable",
+    "amount": 150,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_2_47",
+    "title": "Room Rent",
+    "amount": 7500,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_2_48",
+    "title": "Soap",
+    "amount": 20,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_2_49",
+    "title": "Recharge",
+    "amount": 300,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_2_50",
+    "title": "Biscuit 🍪",
+    "amount": 56,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_3_51",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_4_52",
+    "title": "Food",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_5_53",
+    "title": "Food",
+    "amount": 120,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-05T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_5_54",
+    "title": "Recharge",
+    "amount": 350,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-05T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_6_55",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-06T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_7_56",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-07T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_8_57",
+    "title": "Pen 🖊️",
+    "amount": 10,
+    "category": "Education",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_8_58",
+    "title": "Sampoo",
+    "amount": 5,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_8_59",
+    "title": "Chaat",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Street food craving",
+    "date": "2026-08-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_9_60",
+    "title": "Jeans 👖",
+    "amount": 800,
+    "category": "Shopping & Clothing",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Impulse clothing",
+    "date": "2026-08-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_9_61",
+    "title": "Box",
+    "amount": 40,
+    "category": "Others",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_9_62",
+    "title": "Food",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_10_63",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_11_64",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_11_65",
+    "title": "Grocery (Vishal Mega Mart)",
+    "amount": 419,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_12_66",
+    "title": "Food",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_13_67",
+    "title": "Food",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-13T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_14_68",
+    "title": "Food",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_16_69",
+    "title": "Cold Drink",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Cold drink",
+    "date": "2026-08-16T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_17_70",
+    "title": "Food",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_17_71",
+    "title": "Auto Fare",
+    "amount": 20,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_17_72",
+    "title": "Candid dusting powder",
+    "amount": 174,
+    "category": "Health & Medical",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_18_73",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_18_74",
+    "title": "Cold drink",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Cold drink",
+    "date": "2026-08-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_19_75",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_19_76",
+    "title": "Food",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_20_77",
+    "title": "Food",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-20T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_20_78",
+    "title": "Food",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-20T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_21_79",
+    "title": "Auto Fare",
+    "amount": 10,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-21T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_21_80",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-21T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_21_81",
+    "title": "Cold Drink",
+    "amount": 20,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Cold drink",
+    "date": "2026-08-21T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_22_82",
+    "title": "Soap 🧼",
+    "amount": 20,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-22T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_22_83",
+    "title": "Event & Travel",
+    "amount": 122,
+    "category": "Entertainment & OTT",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-22T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_22_84",
+    "title": "Toothpaste",
+    "amount": 20,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-22T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_24_85",
+    "title": "Food",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-24T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_24_86",
+    "title": "Perfume",
+    "amount": 228,
+    "category": "Personal Care",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Fragrance / impulse",
+    "date": "2026-08-24T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_25_87",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-25T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_26_88",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_26_89",
+    "title": "Metro",
+    "amount": 31,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_26_90",
+    "title": "Bus Travel",
+    "amount": 200,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_26_91",
+    "title": "Auto Fare",
+    "amount": 100,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_27_92",
+    "title": "Doctor fees",
+    "amount": 500,
+    "category": "Health & Medical",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_30_93",
+    "title": "Bus 🚌",
+    "amount": 225,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-30T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_30_94",
+    "title": "Metro card",
+    "amount": 150,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-30T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_31_95",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-31T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_8_31_96",
+    "title": "Dinner",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-08-31T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_1_97",
+    "title": "Room Rent",
+    "amount": 1500,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_1_98",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_1_99",
+    "title": "Recharge (Deepika)",
+    "amount": 300,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_2_100",
+    "title": "Milk",
+    "amount": 27,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_2_101",
+    "title": "Recharge (Papa)",
+    "amount": 400,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_2_102",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_2_103",
+    "title": "Curd",
+    "amount": 20,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_3_104",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_3_105",
+    "title": "Down Payment",
+    "amount": 5120,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_4_106",
+    "title": "Surf",
+    "amount": 15,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_4_107",
+    "title": "Food",
+    "amount": 75,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_5_108",
+    "title": "Food",
+    "amount": 25,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-05T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_5_109",
+    "title": "Food",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-05T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_6_110",
+    "title": "Food",
+    "amount": 35,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-06T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_7_111",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-07T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_7_112",
+    "title": "Vegetable",
+    "amount": 70,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-07T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_8_113",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_9_114",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_10_115",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_10_116",
+    "title": "Shirt",
+    "amount": 500,
+    "category": "Shopping & Clothing",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Impulse shirt buy",
+    "date": "2026-09-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_10_117",
+    "title": "Soap",
+    "amount": 10,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_11_118",
+    "title": "Milk",
+    "amount": 20,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_11_119",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_11_120",
+    "title": "Vegetable",
+    "amount": 50,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_12_121",
+    "title": "Auto fare",
+    "amount": 25,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_12_122",
+    "title": "Atta (Flour)",
+    "amount": 220,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_12_123",
+    "title": "Gas (Cylinder)",
+    "amount": 200,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_12_124",
+    "title": "Mobile Recharge",
+    "amount": 349,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_13_125",
+    "title": "Food",
+    "amount": 65,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-13T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_14_126",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_14_127",
+    "title": "Medicine",
+    "amount": 20,
+    "category": "Health & Medical",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_14_128",
+    "title": "Milk",
+    "amount": 20,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_15_129",
+    "title": "Food",
+    "amount": 55,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_15_130",
+    "title": "Rent",
+    "amount": 2800,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_15_131",
+    "title": "Medicine 💊",
+    "amount": 90,
+    "category": "Health & Medical",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_16_132",
+    "title": "Milk",
+    "amount": 20,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-16T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_16_133",
+    "title": "Apple 🍎",
+    "amount": 60,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-16T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_16_134",
+    "title": "Dosa",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Outside restaurant food",
+    "date": "2026-09-16T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_17_135",
+    "title": "Auto Fare",
+    "amount": 20,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_17_136",
+    "title": "Tea",
+    "amount": 10,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_17_137",
+    "title": "Recharge (Mummy)",
+    "amount": 200,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_17_138",
+    "title": "Daliya",
+    "amount": 35,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_17_139",
+    "title": "Water tap",
+    "amount": 280,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_18_140",
+    "title": "Food",
+    "amount": 85,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_18_141",
+    "title": "Kiwi 🥝",
+    "amount": 90,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_18_142",
+    "title": "Papaya",
+    "amount": 60,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_18_143",
+    "title": "Plumber",
+    "amount": 150,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-18T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_19_144",
+    "title": "Food",
+    "amount": 55,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_19_145",
+    "title": "Vegetable",
+    "amount": 40,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-19T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_20_146",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-20T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_21_147",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-21T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_21_148",
+    "title": "Coconut Water 🌴",
+    "amount": 70,
+    "category": "Health & Medical",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-21T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_22_149",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-22T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_22_150",
+    "title": "Vegetable 🥦",
+    "amount": 10,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-22T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_23_151",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-23T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_23_152",
+    "title": "Dinner",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-23T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_24_153",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-24T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_24_154",
+    "title": "Tea ☕",
+    "amount": 10,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-24T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_24_155",
+    "title": "Gas Cylinder",
+    "amount": 210,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-24T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_25_156",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-25T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_25_157",
+    "title": "Dinner",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-25T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_26_158",
+    "title": "Food",
+    "amount": 90,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_26_159",
+    "title": "Dinner",
+    "amount": 30,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_26_160",
+    "title": "Surf",
+    "amount": 10,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-26T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_27_161",
+    "title": "Metro card",
+    "amount": 100,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_27_162",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_27_163",
+    "title": "Dinner",
+    "amount": 65,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_27_164",
+    "title": "Auto fare Gurgaon",
+    "amount": 40,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-27T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_28_165",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-28T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_29_166",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-29T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_29_167",
+    "title": "Vegetable",
+    "amount": 15,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-29T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_30_168",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-30T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_9_30_169",
+    "title": "Dinner",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-09-30T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_1_170",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_1_171",
+    "title": "Bus",
+    "amount": 200,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_1_172",
+    "title": "Auto fare",
+    "amount": 40,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_1_173",
+    "title": "Ice cream 🍨",
+    "amount": 100,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Sweet treat craving",
+    "date": "2026-10-01T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_2_174",
+    "title": "Petrol",
+    "amount": 200,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_2_175",
+    "title": "Laptop",
+    "amount": 600,
+    "category": "Education",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_2_176",
+    "title": "Haircut",
+    "amount": 80,
+    "category": "Personal Care",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_2_177",
+    "title": "Cold drink",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Cold drink",
+    "date": "2026-10-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_2_178",
+    "title": "Parking",
+    "amount": 40,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-02T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_3_179",
+    "title": "Clothes",
+    "amount": 3010,
+    "category": "Shopping & Clothing",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Big clothes shopping",
+    "date": "2026-10-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_3_180",
+    "title": "Saari",
+    "amount": 1050,
+    "category": "Shopping & Clothing",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_3_181",
+    "title": "Lunch Box",
+    "amount": 180,
+    "category": "Others",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-03T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_4_182",
+    "title": "Metro recharge",
+    "amount": 200,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_4_183",
+    "title": "Bus",
+    "amount": 200,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_4_184",
+    "title": "Rapido",
+    "amount": 43,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_4_185",
+    "title": "Food",
+    "amount": 55,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_4_186",
+    "title": "Dinner",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_4_187",
+    "title": "Auto Fare",
+    "amount": 80,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-04T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_5_188",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-05T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_6_189",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-06T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_6_190",
+    "title": "Gas Cylinder",
+    "amount": 200,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-06T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_6_191",
+    "title": "Vegetable",
+    "amount": 15,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-06T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_7_192",
+    "title": "Food",
+    "amount": 60,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-07T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_7_193",
+    "title": "Dinner",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-07T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_8_194",
+    "title": "Breakfast",
+    "amount": 15,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_8_195",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-08T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_9_196",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_9_197",
+    "title": "Snacks",
+    "amount": 15,
+    "category": "Food & Dining",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Packaged snack",
+    "date": "2026-10-09T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_10_198",
+    "title": "Curd",
+    "amount": 35,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_10_199",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_10_200",
+    "title": "Dinner",
+    "amount": 80,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-10T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_11_201",
+    "title": "Food",
+    "amount": 70,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_11_202",
+    "title": "Curd",
+    "amount": 10,
+    "category": "Groceries",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-11T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_12_203",
+    "title": "Food",
+    "amount": 100,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-12T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_13_204",
+    "title": "Food",
+    "amount": 40,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-13T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_13_205",
+    "title": "Dinner",
+    "amount": 55,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-13T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_14_206",
+    "title": "Food",
+    "amount": 50,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_14_207",
+    "title": "Farewell (Office)",
+    "amount": 100,
+    "category": "Others",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_14_208",
+    "title": "Room Rent",
+    "amount": 2900,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-14T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_15_209",
+    "title": "Recharge (Deepika)",
+    "amount": 300,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_15_210",
+    "title": "Recharge (Ayush)",
+    "amount": 349,
+    "category": "Bills & Utilities",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_15_211",
+    "title": "Tea",
+    "amount": 10,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-15T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_16_212",
+    "title": "Food",
+    "amount": 45,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-16T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_17_213",
+    "title": "Rapido to paytm",
+    "amount": 54,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_17_214",
+    "title": "Rapido",
+    "amount": 57,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_17_215",
+    "title": "Shoes 👟",
+    "amount": 1000,
+    "category": "Shopping & Clothing",
+    "isUnnecessary": true,
+    "unnecessaryReason": "Shoes purchase",
+    "date": "2026-10-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_17_216",
+    "title": "Metro Recharge",
+    "amount": 101,
+    "category": "Transport & Fuel",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  },
+  {
+    "_id": "user_10_17_217",
+    "title": "Dinner",
+    "amount": 35,
+    "category": "Food & Dining",
+    "isUnnecessary": false,
+    "unnecessaryReason": "",
+    "date": "2026-10-17T06:30:00.000Z",
+    "paymentMethod": "UPI / Online"
+  }
+]
