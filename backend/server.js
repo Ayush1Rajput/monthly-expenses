@@ -120,3 +120,5 @@ app.use('/api/budgets', budgetRoutes);
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Expense Tracker Backend running at http://localhost:${PORT}`);
 });
+
+export default app;
