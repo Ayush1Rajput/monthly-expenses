@@ -16,9 +16,16 @@ let isDbConnected = false;
 let dbError = null;
 
 const connectDB = async () => {
-  if (mongoose.connection.readyState === 1) return;
+  if (mongoose.connection.readyState === 1) {
+    isDbConnected = true;
+    dbError = null;
+    return;
+  }
   const uri = process.env.MONGODB_URI;
-  if (!uri) return;
+  if (!uri) {
+    dbError = 'MONGODB_URI environment variable not set on Vercel';
+    return;
+  }
   try {
     await mongoose.connect(uri, { serverSelectionTimeoutMS: 5000 });
     isDbConnected = true;
@@ -29,11 +36,16 @@ const connectDB = async () => {
 };
 
 app.use(async (req, res, next) => {
-  await connectDB();
+  if (mongoose.connection.readyState !== 1) {
+    await connectDB();
+  }
   next();
 });
 
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    await connectDB();
+  }
   res.json({
     status: 'online',
     dbConnected: mongoose.connection.readyState === 1,

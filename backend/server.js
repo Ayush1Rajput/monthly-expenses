@@ -18,15 +18,21 @@ let isDbConnected = false;
 let dbError = null;
 
 const connectDB = async () => {
+  if (mongoose.connection.readyState === 1) {
+    isDbConnected = true;
+    dbError = null;
+    return;
+  }
+
   const uri = process.env.MONGODB_URI;
   if (!uri || uri.includes('<username>') || uri.includes('<password>')) {
-    console.log('⚠️ MongoDB URI not configured yet in backend/.env.');
-    dbError = 'MongoDB URI not set or has placeholders in backend/.env';
+    console.log('⚠️ MongoDB URI not configured yet.');
+    dbError = 'MongoDB URI not set or has placeholders';
     return;
   }
 
   try {
-    await mongoose.connect(uri);
+    await mongoose.connect(uri, { serverSelectionTimeoutMS: 5000 });
     isDbConnected = true;
     dbError = null;
     console.log('✅ Connected successfully to MongoDB Atlas!');
@@ -39,11 +45,22 @@ const connectDB = async () => {
 
 connectDB();
 
+// Ensure connection is established for every request in serverless/cloud environments
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    await connectDB();
+  }
+  next();
+});
+
 // API Health & MongoDB status check
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    await connectDB();
+  }
   res.json({
     status: 'online',
-    dbConnected: isDbConnected && mongoose.connection.readyState === 1,
+    dbConnected: mongoose.connection.readyState === 1,
     dbReadyState: mongoose.connection.readyState,
     dbError: dbError,
     timestamp: new Date().toISOString()
