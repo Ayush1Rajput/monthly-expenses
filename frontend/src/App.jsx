@@ -72,13 +72,15 @@ export default function App() {
   // Handle adding expense
   const handleSaveExpense = async (data) => {
     try {
-      await createExpense(data);
-      if (data.isUnnecessary) {
-        showToast('Expense saved and flagged as Extra Spend ⚠️');
+      const result = await createExpense(data);
+      if (result && result.synced) {
+        showToast('Saved to MongoDB Atlas Cloud! ☁️✅');
+      } else if (data.isUnnecessary) {
+        showToast('Saved locally & flagged as Extra Spend ⚠️');
       } else {
         showToast('Expense recorded successfully! ✅');
       }
-      loadData();
+      await loadData();
     } catch (err) {
       showToast('Failed to save expense');
     }

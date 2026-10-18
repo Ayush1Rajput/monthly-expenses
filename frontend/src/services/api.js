@@ -1,10 +1,10 @@
+import userExpenses from './userExpenses.json';
+
 const API_BASE = '/api';
 
 // Local storage fallback key
 const LOCAL_STORAGE_KEY = 'pennywise_expenses_local';
 const LOCAL_BUDGET_KEY = 'pennywise_budgets_local';
-
-import userExpenses from './userExpenses.json';
 
 export const getLocalExpenses = () => {
   try {
@@ -53,40 +53,79 @@ export const saveLocalBudgets = (budgets) => {
   }
 };
 
-let isServerReachable = true;
-
-const fastFetch = async (url, options = {}, timeoutMs = 800) => {
-  if (!isServerReachable && !url.includes('/health')) {
-    throw new Error('Server known to be offline');
-  }
+// Robust fetch with reasonable mobile timeout (6s for mobile 4G/5G)
+const safeFetch = async (url, options = {}, timeoutMs = 6000) => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const res = await fetch(url, { ...options, signal: controller.signal });
     clearTimeout(timeoutId);
-    isServerReachable = true;
     return res;
   } catch (err) {
     clearTimeout(timeoutId);
-    isServerReachable = false;
     throw err;
+  }
+};
+
+// Automatically sync any offline pending expenses to MongoDB Atlas
+export const syncOfflineExpensesToAtlas = async () => {
+  try {
+    const local = getLocalExpenses();
+    const pending = local.filter(e => e._id && String(e._id).startsWith('loc_'));
+    if (pending.length === 0) return;
+
+    for (const exp of pending) {
+      try {
+        const payload = {
+          title: exp.title,
+          amount: Number(exp.amount),
+          category: exp.category,
+          isUnnecessary: Boolean(exp.isUnnecessary),
+          unnecessaryReason: exp.unnecessaryReason || '',
+          date: exp.date,
+          paymentMethod: exp.paymentMethod || 'UPI / Online'
+        };
+
+        const res = await safeFetch(`${API_BASE}/expenses`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }, 5000);
+
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            // Replace loc_ temporary id with permanent MongoDB Atlas _id
+            exp._id = json.data._id;
+          }
+        }
+      } catch (err) {
+        // Will retry on next sync
+      }
+    }
+    saveLocalExpenses(local);
+  } catch (e) {
+    console.error('Sync offline queue error:', e);
   }
 };
 
 // Check backend & MongoDB connection
 export const checkHealth = async () => {
   try {
-    const res = await fastFetch(`${API_BASE}/health`, {}, 1000);
+    const res = await safeFetch(`${API_BASE}/health`, {}, 5000);
     if (!res.ok) throw new Error('Backend error');
     const data = await res.json();
-    isServerReachable = true;
+    
+    // If connected to Atlas, automatically sync any pending offline items
+    if (data.dbConnected) {
+      syncOfflineExpensesToAtlas().catch(() => {});
+    }
     return data;
   } catch (err) {
-    isServerReachable = false;
     return {
       status: 'offline',
       dbConnected: false,
-      dbError: 'Laptop server is off. Running in 100% Phone Offline Storage mode.'
+      dbError: 'Running in Phone Offline Storage mode.'
     };
   }
 };
@@ -100,19 +139,23 @@ export const fetchExpenses = async (params = {}) => {
   if (params.isUnnecessary !== undefined) query.set('isUnnecessary', params.isUnnecessary);
   if (params.search) query.set('search', params.search);
 
-  if (isServerReachable) {
-    try {
-      const res = await fastFetch(`${API_BASE}/expenses?${query.toString()}`, {}, 800);
-      if (res.ok) {
-        const data = await res.json();
-        if (data.success && data.data && data.data.length > 0) return data.data;
+  try {
+    const res = await safeFetch(`${API_BASE}/expenses?${query.toString()}`, {}, 5000);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.data && data.data.length > 0) {
+        // Update local storage cache with latest cloud data
+        if (!params.category && params.isUnnecessary === undefined && !params.search) {
+          saveLocalExpenses(data.data);
+        }
+        return data.data;
       }
-    } catch (err) {
-      // Laptop server unreachable, fall back instantly to local storage
     }
+  } catch (err) {
+    // Cloud unreachable, fall back to local storage
   }
 
-  // Fallback to local storage (instant 0ms)
+  // Fallback to local storage
   let items = getLocalExpenses();
   if (params.category && params.category !== 'All') {
     items = items.filter(i => i.category === params.category);
@@ -136,41 +179,58 @@ export const fetchExpenses = async (params = {}) => {
   return items.sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 
-// Add new expense (Instant save to local storage, syncs if server is up)
+// Add new expense (Attempts Atlas first; falls back to phone storage with auto-sync)
 export const createExpense = async (expenseData) => {
-  // Always create local object first so nothing is ever lost
-  const newExp = {
+  let createdItem = null;
+
+  try {
+    const res = await safeFetch(`${API_BASE}/expenses`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(expenseData)
+    }, 6000);
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.data) {
+        createdItem = data.data;
+      }
+    }
+  } catch (err) {
+    console.warn('Could not post directly to Atlas, saving locally for auto-sync:', err.message);
+  }
+
+  // If server responded, save real item to local storage
+  if (createdItem) {
+    const list = getLocalExpenses();
+    list.unshift(createdItem);
+    saveLocalExpenses(list);
+    return { ...createdItem, synced: true };
+  }
+
+  // Otherwise save offline with temporary ID for later auto-sync
+  const offlineExp = {
     ...expenseData,
     _id: 'loc_' + Date.now() + Math.random().toString(36).substr(2, 4),
     date: expenseData.date || new Date().toISOString(),
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    synced: false
   };
 
   const list = getLocalExpenses();
-  list.unshift(newExp);
+  list.unshift(offlineExp);
   saveLocalExpenses(list);
-
-  // Try to sync to backend if server is reachable
-  if (isServerReachable) {
-    try {
-      fastFetch(`${API_BASE}/expenses`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(expenseData)
-      }, 1000).catch(() => {});
-    } catch (e) {}
-  }
-
-  return newExp;
+  return offlineExp;
 };
 
 // Delete expense
 export const deleteExpense = async (id) => {
-  try {
-    const res = await fetch(`${API_BASE}/expenses/${id}`, { method: 'DELETE' });
-    if (res.ok) return true;
-  } catch (err) {
-    console.warn('Deleting locally:', err.message);
+  if (!String(id).startsWith('loc_')) {
+    try {
+      await safeFetch(`${API_BASE}/expenses/${id}`, { method: 'DELETE' }, 4000);
+    } catch (err) {
+      console.warn('Deleting on server failed:', err.message);
+    }
   }
 
   const list = getLocalExpenses().filter(e => e._id !== id);
@@ -180,15 +240,13 @@ export const deleteExpense = async (id) => {
 
 // Monthly analytics
 export const fetchMonthlyAnalytics = async (month, year) => {
-  if (isServerReachable) {
-    try {
-      const res = await fastFetch(`${API_BASE}/analytics/monthly?month=${month}&year=${year}`, {}, 800);
-      if (res.ok) {
-        const json = await res.json();
-        if (json.success) return json;
-      }
-    } catch (err) {}
-  }
+  try {
+    const res = await safeFetch(`${API_BASE}/analytics/monthly?month=${month}&year=${year}`, {}, 5000);
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success) return json;
+    }
+  } catch (err) {}
 
   // Local calculation
   const all = getLocalExpenses().filter(i => {
@@ -257,15 +315,13 @@ export const fetchMonthlyAnalytics = async (month, year) => {
 
 // Yearly analytics
 export const fetchYearlyAnalytics = async (year) => {
-  if (isServerReachable) {
-    try {
-      const res = await fastFetch(`${API_BASE}/analytics/yearly?year=${year}`, {}, 800);
-      if (res.ok) {
-        const json = await res.json();
-        if (json.success) return json;
-      }
-    } catch (err) {}
-  }
+  try {
+    const res = await safeFetch(`${API_BASE}/analytics/yearly?year=${year}`, {}, 5000);
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success) return json;
+    }
+  } catch (err) {}
 
   // Local calculation
   const all = getLocalExpenses().filter(i => {
@@ -346,49 +402,6 @@ export const fetchYearlyAnalytics = async (year) => {
   };
 };
 
-// Seed sample data for user to test immediately
 export const seedSampleData = async () => {
-  try {
-    const res = await fetch(`${API_BASE}/seed-demo`, { method: 'POST' });
-    if (res.ok) return await res.json();
-  } catch (err) {}
-
-  // Local seed
-  const currentYear = new Date().getFullYear();
-  const sampleItems = [
-    { title: 'Supermarket monthly groceries', amount: 4800, category: 'Groceries', isUnnecessary: false },
-    { title: 'Electricity & Water bill', amount: 1650, category: 'Bills & Utilities', isUnnecessary: false },
-    { title: 'Late night fast food delivery', amount: 620, category: 'Food & Dining', isUnnecessary: true, unnecessaryReason: 'Late night craving' },
-    { title: 'Fuel for vehicle', amount: 2200, category: 'Transport & Fuel', isUnnecessary: false },
-    { title: 'Impulse clothing sale buy', amount: 2499, category: 'Shopping & Clothing', isUnnecessary: true, unnecessaryReason: 'Flash sale impulse' },
-    { title: 'Weekend restaurant dinner', amount: 1450, category: 'Food & Dining', isUnnecessary: true, unnecessaryReason: 'Could eat at home' },
-    { title: 'Pharmacy & vitamins', amount: 780, category: 'Health & Medical', isUnnecessary: false },
-    { title: 'Unused Gym subscription', amount: 1200, category: 'Entertainment & OTT', isUnnecessary: true, unnecessaryReason: 'Did not visit gym' },
-    { title: 'Mobile recharge & Wi-Fi', amount: 999, category: 'Bills & Utilities', isUnnecessary: false },
-    { title: 'Cafe premium iced coffee', amount: 350, category: 'Food & Dining', isUnnecessary: true, unnecessaryReason: 'Expensive coffee habit' },
-    { title: 'Vegetable market', amount: 850, category: 'Groceries', isUnnecessary: false },
-    { title: 'Cab ride instead of metro', amount: 420, category: 'Transport & Fuel', isUnnecessary: true, unnecessaryReason: 'Woke up late' },
-  ];
-
-  const generated = [];
-  for (let m = 0; m < 12; m++) {
-    sampleItems.forEach((item, idx) => {
-      const day = Math.min(28, (idx * 2) + 2);
-      const expenseDate = new Date(currentYear, m, day, 14, 30);
-      const variance = 1 + (Math.sin(m + idx) * 0.15);
-      generated.push({
-        _id: 'seed_' + m + '_' + idx,
-        title: item.title,
-        amount: Math.round(item.amount * variance),
-        category: item.category,
-        isUnnecessary: item.isUnnecessary,
-        unnecessaryReason: item.unnecessaryReason || '',
-        date: expenseDate.toISOString(),
-        paymentMethod: 'UPI / Online'
-      });
-    });
-  }
-
-  saveLocalExpenses(generated);
-  return { success: true, message: `Loaded ${generated.length} sample expenses for ${currentYear}` };
+  return { success: true };
 };
