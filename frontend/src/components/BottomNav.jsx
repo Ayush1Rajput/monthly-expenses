@@ -12,14 +12,14 @@ export default function BottomNav({ activeTab, onTabChange, onOpenAdd, wasteCoun
 
   return (
     <div className="fixed bottom-3 left-0 right-0 z-40 px-4 pointer-events-none">
-      <nav className="max-w-md mx-auto glass-surface-active rounded-[28px] border border-white/[0.12] shadow-2xl shadow-black/80 px-2 py-1.5 flex items-center justify-around pointer-events-auto backdrop-blur-2xl">
+      <nav className="max-w-md mx-auto glass-surface-active rounded-[28px] border border-slate-200/90 dark:border-white/[0.12] shadow-2xl shadow-slate-900/10 dark:shadow-black/80 px-2 py-1.5 flex items-center justify-around pointer-events-auto backdrop-blur-2xl transition-colors duration-200">
         {tabs.map((tab) => {
           if (tab.isAction) {
             return (
               <div key="add" className="relative -top-5 flex items-center justify-center px-1">
                 <button
                   onClick={onOpenAdd}
-                  className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-emerald-300 flex items-center justify-center text-slate-950 shadow-xl shadow-emerald-500/40 hover:shadow-emerald-500/60 active:scale-90 transition-all transform duration-150 border-2 border-slate-950"
+                  className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-emerald-300 flex items-center justify-center text-slate-950 shadow-xl shadow-emerald-500/40 hover:shadow-emerald-500/60 active:scale-90 transition-all transform duration-150 border-2 border-white dark:border-slate-950"
                   aria-label="Add Expense"
                 >
                   <Plus size={26} strokeWidth={3} />
@@ -37,8 +37,8 @@ export default function BottomNav({ activeTab, onTabChange, onOpenAdd, wasteCoun
               onClick={() => onTabChange(tab.id)}
               className={`flex-1 py-1 px-1 flex flex-col items-center justify-center rounded-2xl relative transition-all duration-200 active:scale-90 ${
                 isActive
-                  ? 'text-emerald-400 font-bold'
-                  : 'text-slate-400 hover:text-slate-200 font-medium'
+                  ? 'text-emerald-600 dark:text-emerald-400 font-bold'
+                  : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-medium'
               }`}
             >
               <div className="relative flex items-center justify-center">
@@ -49,11 +49,11 @@ export default function BottomNav({ activeTab, onTabChange, onOpenAdd, wasteCoun
                   </span>
                 )}
               </div>
-              <span className={`text-[10px] mt-1 tracking-tight ${isActive ? 'text-emerald-400 font-extrabold' : 'text-slate-400'}`}>
+              <span className={`text-[10px] mt-1 tracking-tight ${isActive ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-slate-500 dark:text-slate-400'}`}>
                 {tab.label}
               </span>
               {isActive && (
-                <span className="w-1 h-1 rounded-full bg-emerald-400 mt-0.5 animate-pulse" />
+                <span className="w-1 h-1 rounded-full bg-emerald-500 dark:bg-emerald-400 mt-0.5 animate-pulse" />
               )}
             </button>
           );

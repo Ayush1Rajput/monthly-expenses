@@ -6,7 +6,6 @@ import WasteWatcher from './components/WasteWatcher';
 import YearlyReview from './components/YearlyReview';
 import HistoryView from './components/HistoryView';
 import QuickAddModal from './components/QuickAddModal';
-import SettingsModal from './components/SettingsModal';
 import {
   fetchExpenses,
   createExpense,
@@ -31,8 +30,28 @@ export default function App() {
   const [dbStatus, setDbStatus] = useState({ dbConnected: false, status: 'checking' });
 
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+
+  // Dark & Light Theme State
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('pennywise_theme') || 'dark';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('pennywise_theme', theme);
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.classList.remove('light');
+    } else {
+      root.classList.add('light');
+      root.classList.remove('dark');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -100,39 +119,29 @@ export default function App() {
     try {
       await seedSampleData();
       showToast('Loaded 12-Month Sample Data! Check out Yearly Review 🎉');
-      setIsSettingsOpen(false);
       loadData();
     } catch (err) {
       showToast('Failed to seed demo data');
     }
   };
 
-  // Clear all data
-  const handleClearData = async () => {
-    if (window.confirm('Are you sure you want to erase all expenses? This cannot be undone.')) {
-      saveLocalExpenses([]);
-      showToast('All local data cleared');
-      setIsSettingsOpen(false);
-      loadData();
-    }
-  };
-
   const wasteCount = expenses.filter(e => e.isUnnecessary).length;
 
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-black">
+    <div className="min-h-screen bg-slate-100 dark:bg-[#030712] text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-200">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 glass-surface-active border border-emerald-500/40 text-emerald-300 px-4 py-2 rounded-2xl shadow-2xl text-xs font-black animate-fade-in flex items-center gap-2 backdrop-blur-2xl">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 glass-surface-active border border-emerald-500/40 text-emerald-800 dark:text-emerald-300 px-4 py-2 rounded-2xl shadow-2xl text-xs font-black animate-fade-in flex items-center gap-2 backdrop-blur-2xl">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Header */}
+      {/* Top Header with Dark/Light Theme Toggle */}
       <Header
         dbStatus={dbStatus}
-        onOpenSettings={() => setIsSettingsOpen(true)}
+        theme={theme}
+        onToggleTheme={toggleTheme}
         onSeedDemo={handleSeedDemo}
         hasExpenses={allExpenses.length > 0}
       />
@@ -148,6 +157,7 @@ export default function App() {
             onMonthChange={(m) => setCurrentMonth(m)}
             onDeleteExpense={handleDeleteExpense}
             onOpenAdd={() => setIsAddOpen(true)}
+            theme={theme}
           />
         )}
 
@@ -156,6 +166,7 @@ export default function App() {
             analytics={monthlyAnalytics}
             expenses={expenses}
             onDeleteExpense={handleDeleteExpense}
+            theme={theme}
           />
         )}
 
@@ -168,6 +179,7 @@ export default function App() {
               setCurrentMonth(m);
               setActiveTab('overview');
             }}
+            theme={theme}
           />
         )}
 
@@ -175,6 +187,7 @@ export default function App() {
           <HistoryView
             expenses={allExpenses}
             onDeleteExpense={handleDeleteExpense}
+            theme={theme}
           />
         )}
       </main>
@@ -185,22 +198,15 @@ export default function App() {
         onTabChange={(tab) => setActiveTab(tab)}
         onOpenAdd={() => setIsAddOpen(true)}
         wasteCount={wasteCount}
+        theme={theme}
       />
 
-      {/* Modals */}
+      {/* Quick Add Bottom Sheet Modal */}
       <QuickAddModal
         isOpen={isAddOpen}
         onClose={() => setIsAddOpen(false)}
         onSave={handleSaveExpense}
-      />
-
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        dbStatus={dbStatus}
-        onSeedDemo={handleSeedDemo}
-        onClearData={handleClearData}
-        hasExpenses={allExpenses.length > 0}
+        theme={theme}
       />
     </div>
   );
