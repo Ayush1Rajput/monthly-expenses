@@ -9,7 +9,9 @@ import {
   BarChart3,
   TrendingDown,
   TrendingUp,
+  ChevronLeft,
   ChevronRight,
+  ChevronDown,
   ArrowRight,
   Clock,
   Sparkles,
@@ -63,6 +65,7 @@ export default function MonthOverview({
   currentMonth,
   currentYear,
   onMonthChange,
+  onYearChange,
   onDeleteExpense,
   onOpenAdd,
   theme,
@@ -72,9 +75,33 @@ export default function MonthOverview({
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedWeek, setSelectedWeek] = useState('all');
+  const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [weekStartPref, setWeekStartPref] = useState(() => {
     return localStorage.getItem('pennywise_week_start') || 'monday';
   });
+
+  const fullMonthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const handlePrevMonth = () => {
+    if (currentMonth === 1) {
+      if (onYearChange) onYearChange(currentYear - 1);
+      onMonthChange(12);
+    } else {
+      onMonthChange(currentMonth - 1);
+    }
+  };
+
+  const handleNextMonth = () => {
+    if (currentMonth === 12) {
+      if (onYearChange) onYearChange(currentYear + 1);
+      onMonthChange(1);
+    } else {
+      onMonthChange(currentMonth + 1);
+    }
+  };
 
   const toggleWeekStartPref = () => {
     const next = weekStartPref === 'monday' ? 'sunday' : 'monday';
@@ -261,24 +288,70 @@ export default function MonthOverview({
         </button>
       </div>
 
-      {/* 2. Month Segment Carousel (Select which month to view) */}
-      <div className="flex items-center gap-1.5 overflow-x-auto hide-scrollbar py-1 -mx-1 px-1">
-        {monthsList.map((m) => {
-          const isSelected = currentMonth === m.num;
-          return (
-            <button
-              key={m.num}
-              onClick={() => onMonthChange(m.num)}
-              className={`px-3.5 py-1.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all duration-200 active:scale-95 ${
-                isSelected
-                  ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-extrabold shadow-md'
-                  : 'bg-slate-200/80 hover:bg-slate-300 text-slate-700 dark:bg-white/[0.04] dark:text-slate-400 dark:hover:text-white border border-slate-300/80 dark:border-white/[0.06]'
-              }`}
-            >
-              {m.name}
-            </button>
-          );
-        })}
+      {/* 2. Month Navigator: < October 2026 > */}
+      <div className="relative flex flex-col items-center">
+        <div className="flex items-center justify-between w-full max-w-[290px] px-2.5 py-1.5 bg-slate-200/80 dark:bg-white/[0.05] rounded-2xl border border-slate-300/80 dark:border-white/[0.08] shadow-sm">
+          <button
+            onClick={handlePrevMonth}
+            className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-300/80 dark:hover:bg-white/[0.08] active:scale-90 transition-all"
+            title="Previous Month"
+          >
+            <ChevronLeft size={20} strokeWidth={2.5} />
+          </button>
+
+          <button
+            onClick={() => setShowMonthPicker(prev => !prev)}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-xl text-sm font-black text-slate-900 dark:text-white hover:bg-slate-300/60 dark:hover:bg-white/[0.06] active:scale-95 transition-all"
+            title="Click to select month"
+          >
+            <span>{fullMonthNames[currentMonth - 1]} {currentYear}</span>
+            <ChevronDown size={14} className={`text-slate-400 transition-transform duration-200 ${showMonthPicker ? 'rotate-180' : ''}`} />
+          </button>
+
+          <button
+            onClick={handleNextMonth}
+            className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-300/80 dark:hover:bg-white/[0.08] active:scale-90 transition-all"
+            title="Next Month"
+          >
+            <ChevronRight size={20} strokeWidth={2.5} />
+          </button>
+        </div>
+
+        {/* Dropdown Popover if user wants to jump directly to any month */}
+        {showMonthPicker && (
+          <div className="absolute top-12 z-30 w-full max-w-[310px] p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/[0.12] shadow-2xl animate-fade-in backdrop-blur-xl">
+            <div className="flex items-center justify-between mb-2 pb-1 border-b border-slate-100 dark:border-white/[0.06]">
+              <span className="text-[11px] font-black uppercase text-slate-500 dark:text-slate-400">Select Month</span>
+              <button
+                onClick={() => setShowMonthPicker(false)}
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-white"
+              >
+                <X size={14} />
+              </button>
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              {monthsList.map((m) => {
+                const isSelected = currentMonth === m.num;
+                return (
+                  <button
+                    key={m.num}
+                    onClick={() => {
+                      onMonthChange(m.num);
+                      setShowMonthPicker(false);
+                    }}
+                    className={`py-2 rounded-xl text-xs font-bold transition-all ${
+                      isSelected
+                        ? 'bg-emerald-500 text-slate-950 font-black shadow-md'
+                        : 'bg-slate-100 dark:bg-white/[0.04] text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.08]'
+                    }`}
+                  >
+                    {m.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 3. If in WEEKLY mode, show the Actual Week Selector Pills + Week Start Switch */}

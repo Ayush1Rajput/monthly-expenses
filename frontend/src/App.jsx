@@ -166,6 +166,7 @@ export default function App() {
             currentMonth={currentMonth}
             currentYear={currentYear}
             onMonthChange={(m) => setCurrentMonth(m)}
+            onYearChange={(y) => setCurrentYear(y)}
             onDeleteExpense={handleDeleteExpense}
             onOpenAdd={() => setIsAddOpen(true)}
             theme={theme}
