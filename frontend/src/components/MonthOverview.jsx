@@ -13,10 +13,48 @@ import {
   ArrowRight,
   Clock,
   Sparkles,
-  X
+  X,
+  SlidersHorizontal
 } from 'lucide-react';
 import { formatINR, CATEGORIES } from '../utils/categories';
 import CategoryIcon from './CategoryIcon';
+
+// Helper function to calculate actual calendar weeks for any month
+function getActualCalendarWeeks(year, month, startDayPreference = 'monday') {
+  const totalDays = new Date(year, month, 0).getDate();
+  const weeks = [];
+  let currentStart = 1;
+  const isMondayStart = startDayPreference === 'monday';
+
+  while (currentStart <= totalDays) {
+    const startDate = new Date(year, month - 1, currentStart);
+    const dayOfWeek = startDate.getDay(); // 0 is Sun, 1 is Mon, ..., 6 is Sat
+
+    let daysRemainingInWeek;
+    if (isMondayStart) {
+      // Week ends on Sunday (day 0)
+      daysRemainingInWeek = dayOfWeek === 0 ? 0 : (7 - dayOfWeek);
+    } else {
+      // Week ends on Saturday (day 6)
+      daysRemainingInWeek = 6 - dayOfWeek;
+    }
+
+    const currentEnd = Math.min(totalDays, currentStart + daysRemainingInWeek);
+    const endDate = new Date(year, month - 1, currentEnd);
+
+    weeks.push({
+      weekNum: weeks.length + 1,
+      startDay: currentStart,
+      endDay: currentEnd,
+      daysCount: currentEnd - currentStart + 1,
+      startDayName: startDate.toLocaleDateString('en-US', { weekday: 'short' }),
+      endDayName: endDate.toLocaleDateString('en-US', { weekday: 'short' })
+    });
+
+    currentStart = currentEnd + 1;
+  }
+  return weeks;
+}
 
 export default function MonthOverview({
   analytics,
@@ -35,6 +73,15 @@ export default function MonthOverview({
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedWeek, setSelectedWeek] = useState('all');
   const [selectedDay, setSelectedDay] = useState(null); // Filter by specific day in week
+  const [weekStartPref, setWeekStartPref] = useState(() => {
+    return localStorage.getItem('pennywise_week_start') || 'monday';
+  });
+
+  const toggleWeekStartPref = () => {
+    const next = weekStartPref === 'monday' ? 'sunday' : 'monday';
+    setWeekStartPref(next);
+    localStorage.setItem('pennywise_week_start', next);
+  };
 
   const summary = analytics?.summary || { totalSpent: 0, necessarySpent: 0, unnecessarySpent: 0, wastePercentage: 0 };
   const budgetAlerts = analytics?.budgetAlerts || [];
@@ -54,35 +101,23 @@ export default function MonthOverview({
     { num: 12, name: 'Dec' },
   ];
 
-  const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
-  const totalWeeks = Math.ceil(daysInMonth / 7);
+  const monthShortName = monthsList[currentMonth - 1]?.name || '';
 
   const today = new Date();
   const isCurrentMonthAndYear = (today.getMonth() + 1 === currentMonth) && (today.getFullYear() === currentYear);
   const todayDay = today.getDate();
 
-  // Reset or select current week when switching month/year
-  useEffect(() => {
-    if (isCurrentMonthAndYear) {
-      const currentWeekNum = Math.min(totalWeeks, Math.ceil(todayDay / 7));
-      setSelectedWeek(currentWeekNum);
-    } else {
-      setSelectedWeek('all');
-    }
-    setSelectedDay(null);
-  }, [currentMonth, currentYear, totalWeeks, isCurrentMonthAndYear, todayDay]);
+  // Compute actual calendar weeks for this month based on user's week-start preference (Monday or Sunday)
+  const calendarWeeks = getActualCalendarWeeks(currentYear, currentMonth, weekStartPref);
 
-  // Compute Weekly breakdown data for current month
-  const weeksData = [];
-  for (let w = 1; w <= totalWeeks; w++) {
-    const startDay = (w - 1) * 7 + 1;
-    const endDay = Math.min(w * 7, daysInMonth);
-    const isCurrentWeek = isCurrentMonthAndYear && todayDay >= startDay && todayDay <= endDay;
+  // Compute Weekly breakdown data using actual calendar week boundaries
+  const weeksData = calendarWeeks.map((w) => {
+    const isCurrentWeek = isCurrentMonthAndYear && todayDay >= w.startDay && todayDay <= w.endDay;
 
     const weekItems = expenses.filter(e => {
       const d = new Date(e.date);
       const day = d.getDate();
-      return day >= startDay && day <= endDay;
+      return day >= w.startDay && day <= w.endDay;
     });
 
     let total = 0;
@@ -90,8 +125,8 @@ export default function MonthOverview({
     let unnecessary = 0;
     const dayBreakdown = [];
 
-    // Initialize 7-day breakdown for this week
-    for (let d = startDay; d <= endDay; d++) {
+    // Initialize breakdown for each day of this actual week
+    for (let d = w.startDay; d <= w.endDay; d++) {
       const dateObj = new Date(currentYear, currentMonth - 1, d);
       const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
       const isThisDayToday = isCurrentMonthAndYear && d === todayDay;
@@ -126,16 +161,13 @@ export default function MonthOverview({
     });
 
     const wastePercent = total > 0 ? Math.round((unnecessary / total) * 100) : 0;
-    const daysCount = endDay - startDay + 1;
-    const dailyAvg = Math.round(total / daysCount);
+    const dailyAvg = Math.round(total / (w.daysCount || 1));
 
-    weeksData.push({
-      weekNum: w,
-      startDay,
-      endDay,
-      label: `Week ${w} (${startDay}–${endDay} ${monthsList[currentMonth - 1]?.name})`,
-      shortLabel: `Week ${w}`,
-      dateRange: `${startDay}–${endDay} ${monthsList[currentMonth - 1]?.name}`,
+    return {
+      ...w,
+      label: `Week ${w.weekNum} (${w.startDay}–${w.endDay} ${monthShortName})`,
+      shortLabel: `Week ${w.weekNum}`,
+      dateRange: `${w.startDay} ${w.startDayName} – ${w.endDay} ${w.endDayName} ${monthShortName}`,
       isCurrentWeek,
       items: weekItems,
       totalSpent: total,
@@ -144,8 +176,23 @@ export default function MonthOverview({
       wastePercentage: wastePercent,
       dailyAverage: dailyAvg,
       dayBreakdown
-    });
-  }
+    };
+  });
+
+  // Automatically select current week when in current month, or select Week 1 / All
+  useEffect(() => {
+    if (isCurrentMonthAndYear) {
+      const currentWeekObj = weeksData.find(w => todayDay >= w.startDay && todayDay <= w.endDay);
+      if (currentWeekObj) {
+        setSelectedWeek(currentWeekObj.weekNum);
+      } else {
+        setSelectedWeek('all');
+      }
+    } else {
+      setSelectedWeek('all');
+    }
+    setSelectedDay(null);
+  }, [currentMonth, currentYear, weekStartPref]);
 
   // Active week data when a specific week is chosen
   const activeWeekData = typeof selectedWeek === 'number'
@@ -242,16 +289,23 @@ export default function MonthOverview({
         })}
       </div>
 
-      {/* 3. If in WEEKLY mode, show the Week Selector Pills */}
+      {/* 3. If in WEEKLY mode, show the Actual Week Selector Pills + Week Start Switch */}
       {viewMode === 'weekly' && (
         <div className="space-y-1.5">
           <div className="flex items-center justify-between px-1">
             <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Select Week in {monthsList[currentMonth - 1]?.name}
+              {monthShortName} {currentYear} • Calendar Weeks
             </span>
-            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
-              {totalWeeks} Weeks Available
-            </span>
+
+            {/* Week Start Preference Toggle (Mon-Sun vs Sun-Sat) */}
+            <button
+              onClick={toggleWeekStartPref}
+              className="text-[10px] font-black text-slate-600 dark:text-slate-400 bg-slate-200/80 dark:bg-white/[0.06] hover:bg-slate-300 dark:hover:bg-white/[0.1] px-2 py-0.5 rounded-lg border border-slate-300 dark:border-white/[0.08] transition-all flex items-center gap-1 active:scale-95"
+              title="Click to toggle week start (Monday vs Sunday)"
+            >
+              <span>{weekStartPref === 'monday' ? 'Mon–Sun' : 'Sun–Sat'}</span>
+              <SlidersHorizontal size={10} />
+            </button>
           </div>
 
           <div className="flex items-center gap-1.5 overflow-x-auto hide-scrollbar py-1 -mx-1 px-1">
@@ -268,10 +322,10 @@ export default function MonthOverview({
               }`}
             >
               <BarChart3 size={13} />
-              <span>All Weeks Comparison</span>
+              <span>All Weeks</span>
             </button>
 
-            {/* Individual Week Pills */}
+            {/* Individual Actual Calendar Week Pills */}
             {weeksData.map((w) => {
               const isSelected = selectedWeek === w.weekNum;
               return (
@@ -287,8 +341,10 @@ export default function MonthOverview({
                       : 'bg-slate-200/80 hover:bg-slate-300 text-slate-700 dark:bg-white/[0.04] dark:text-slate-400 dark:hover:text-white border border-slate-300/80 dark:border-white/[0.06]'
                   }`}
                 >
-                  <span>{w.shortLabel}</span>
-                  <span className="text-[10px] opacity-75 font-normal">({w.startDay}–{w.endDay})</span>
+                  <span>Week {w.weekNum}</span>
+                  <span className="text-[10px] opacity-80 font-normal">
+                    ({w.startDay}–{w.endDay} {monthShortName})
+                  </span>
                   {w.isCurrentWeek && (
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Current Week" />
                   )}
@@ -382,22 +438,22 @@ export default function MonthOverview({
         </div>
       )}
 
-      {/* 4B. WEEKLY VIEW - SPECIFIC WEEK HERO CARD */}
+      {/* 4B. WEEKLY VIEW - SPECIFIC ACTUAL WEEK HERO CARD */}
       {viewMode === 'weekly' && activeWeekData && (
         <div className="relative overflow-hidden rounded-[32px] p-6 bg-gradient-to-br from-white via-slate-50 to-emerald-50/60 dark:from-slate-900 dark:via-slate-950 dark:to-emerald-950/40 border border-slate-200/90 dark:border-white/[0.1] shadow-xl dark:shadow-2xl transition-colors duration-200">
           <div className="absolute top-0 right-0 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10">
-            {/* Header tags */}
+            {/* Header tags with exact calendar dates */}
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[11px] font-extrabold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                  Week {activeWeekData.weekNum} • {activeWeekData.dateRange}
+                  Week {activeWeekData.weekNum} • {activeWeekData.startDay} {activeWeekData.startDayName} – {activeWeekData.endDay} {activeWeekData.endDayName}
                 </span>
                 {activeWeekData.isCurrentWeek && (
                   <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-emerald-500 text-slate-950 shadow-sm animate-pulse">
-                    CURRENT
+                    CURRENT WEEK
                   </span>
                 )}
               </div>
@@ -421,7 +477,7 @@ export default function MonthOverview({
                   <span>{activeWeekData.totalSpent.toLocaleString('en-IN')}</span>
                 </h2>
                 <span className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold block mt-0.5">
-                  Daily Pace: ~{formatINR(activeWeekData.dailyAverage)} / day
+                  Daily Pace: ~{formatINR(activeWeekData.dailyAverage)} / day ({activeWeekData.daysCount} calendar days)
                 </span>
               </div>
 
@@ -468,11 +524,11 @@ export default function MonthOverview({
               </div>
             </div>
 
-            {/* 7-DAY INTERACTIVE DAILY BAR CHART */}
+            {/* ACTUAL CALENDAR DAYS BAR CHART */}
             <div className="mt-5 pt-4 border-t border-slate-200/90 dark:border-white/[0.08]">
               <div className="flex items-center justify-between text-[11px] mb-2 px-0.5">
                 <span className="font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  Daily Spend Distribution
+                  {activeWeekData.daysCount}-Day Daily Breakdown
                 </span>
                 {selectedDay !== null ? (
                   <button
@@ -551,7 +607,7 @@ export default function MonthOverview({
               {/* Notice if filtered by a specific day */}
               {selectedDay !== null && (
                 <div className="mt-2 text-center py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[11px] font-bold text-emerald-700 dark:text-emerald-300">
-                  Showing transactions for Day {selectedDay} ({activeWeekData.dayBreakdown.find(d => d.day === selectedDay)?.dayName})
+                  Showing transactions for {activeWeekData.dayBreakdown.find(d => d.day === selectedDay)?.dayName}, {selectedDay} {monthShortName}
                 </div>
               )}
             </div>
@@ -565,10 +621,10 @@ export default function MonthOverview({
           <div className="relative overflow-hidden rounded-[32px] p-6 bg-gradient-to-br from-white via-slate-50 to-indigo-50/50 dark:from-slate-900 dark:via-slate-950 dark:to-indigo-950/40 border border-slate-200/90 dark:border-white/[0.1] shadow-xl dark:shadow-2xl">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] font-extrabold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
-                {monthsList[currentMonth - 1]?.name} Weekly Comparison
+                {monthShortName} Calendar Weeks Comparison
               </span>
               <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-500/30">
-                {weeksData.length} Weeks
+                {weeksData.length} Calendar Weeks
               </span>
             </div>
 
@@ -585,10 +641,10 @@ export default function MonthOverview({
             {/* Weekly Side-by-Side Comparative Bar Chart */}
             <div className="mt-6 pt-4 border-t border-slate-200/90 dark:border-white/[0.08]">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-3">
-                Weekly Comparison Bar Chart (Tap week to view)
+                Weekly Flow Comparison (Tap any week to inspect)
               </span>
 
-              <div className="grid grid-cols-5 gap-2 items-end h-32 pt-4">
+              <div className="grid grid-flow-col auto-cols-fr gap-2 items-end h-32 pt-4">
                 {weeksData.map((w) => {
                   const heightPercent = w.totalSpent > 0 ? Math.max(16, Math.round((w.totalSpent / maxWeekSpend) * 100)) : 8;
 
@@ -632,10 +688,10 @@ export default function MonthOverview({
             </div>
           </div>
 
-          {/* Cards for each week */}
+          {/* Cards for each calendar week */}
           <div className="space-y-2 pt-1">
             <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1 block">
-              Week-by-Week Breakdown
+              Actual Calendar Weeks
             </span>
 
             {weeksData.map((w) => (
@@ -650,7 +706,7 @@ export default function MonthOverview({
                 <div>
                   <div className="flex items-center gap-2">
                     <h4 className="text-xs font-black text-slate-900 dark:text-white">
-                      {w.label}
+                      Week {w.weekNum} ({w.startDay} {w.startDayName} – {w.endDay} {w.endDayName})
                     </h4>
                     {w.isCurrentWeek && (
                       <span className="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-emerald-500 text-slate-950">
