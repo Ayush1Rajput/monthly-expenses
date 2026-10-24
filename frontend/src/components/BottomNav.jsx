@@ -1,9 +1,9 @@
 import React from 'react';
 import { LayoutDashboard, AlertOctagon, Plus, CalendarRange, ReceiptText } from 'lucide-react';
 
-export default function BottomNav({ activeTab, onTabChange, onOpenAdd, wasteCount = 0 }) {
+export default function BottomNav({ activeTab, onTabChange, onOpenAdd, wasteCount = 0, viewMode = 'monthly' }) {
   const tabs = [
-    { id: 'overview', label: 'Monthly', icon: LayoutDashboard },
+    { id: 'overview', label: viewMode === 'weekly' ? 'Weekly' : 'Monthly', icon: LayoutDashboard },
     { id: 'waste', label: 'Waste', icon: AlertOctagon, badge: wasteCount },
     { id: 'add_action', isAction: true },
     { id: 'yearly', label: '1-Year', icon: CalendarRange },

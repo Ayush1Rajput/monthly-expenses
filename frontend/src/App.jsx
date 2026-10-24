@@ -37,6 +37,16 @@ export default function App() {
     return localStorage.getItem('pennywise_theme') || 'dark';
   });
 
+  // Monthly vs Weekly View Mode State
+  const [viewMode, setViewMode] = useState(() => {
+    return localStorage.getItem('pennywise_view_mode') || 'monthly';
+  });
+
+  const handleViewModeChange = (mode) => {
+    setViewMode(mode);
+    localStorage.setItem('pennywise_view_mode', mode);
+  };
+
   useEffect(() => {
     localStorage.setItem('pennywise_theme', theme);
     const root = document.documentElement;
@@ -152,12 +162,15 @@ export default function App() {
           <MonthOverview
             analytics={monthlyAnalytics}
             expenses={expenses}
+            allExpenses={allExpenses}
             currentMonth={currentMonth}
             currentYear={currentYear}
             onMonthChange={(m) => setCurrentMonth(m)}
             onDeleteExpense={handleDeleteExpense}
             onOpenAdd={() => setIsAddOpen(true)}
             theme={theme}
+            viewMode={viewMode}
+            onViewModeChange={handleViewModeChange}
           />
         )}
 
@@ -199,6 +212,7 @@ export default function App() {
         onOpenAdd={() => setIsAddOpen(true)}
         wasteCount={wasteCount}
         theme={theme}
+        viewMode={viewMode}
       />
 
       {/* Quick Add Bottom Sheet Modal */}
