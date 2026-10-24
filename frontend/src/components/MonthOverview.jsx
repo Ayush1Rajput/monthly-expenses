@@ -72,7 +72,6 @@ export default function MonthOverview({
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedWeek, setSelectedWeek] = useState('all');
-  const [selectedDay, setSelectedDay] = useState(null); // Filter by specific day in week
   const [weekStartPref, setWeekStartPref] = useState(() => {
     return localStorage.getItem('pennywise_week_start') || 'monday';
   });
@@ -191,7 +190,6 @@ export default function MonthOverview({
     } else {
       setSelectedWeek('all');
     }
-    setSelectedDay(null);
   }, [currentMonth, currentYear, weekStartPref]);
 
   // Active week data when a specific week is chosen
@@ -216,18 +214,12 @@ export default function MonthOverview({
   const maxWeekSpend = Math.max(...weeksData.map(w => w.totalSpent), 1);
   const peakWeek = weeksData.reduce((prev, curr) => (curr.totalSpent > prev.totalSpent ? curr : prev), weeksData[0]);
 
-  // Determine base list of expenses depending on View Mode and selected week/day
+  // Determine base list of expenses depending on View Mode and selected week
   let baseExpenses = [];
-  if (viewMode === 'monthly') {
-    baseExpenses = expenses;
-  } else if (selectedWeek === 'all') {
+  if (viewMode === 'monthly' || selectedWeek === 'all') {
     baseExpenses = expenses;
   } else if (activeWeekData) {
-    if (selectedDay !== null) {
-      baseExpenses = activeWeekData.items.filter(e => new Date(e.date).getDate() === selectedDay);
-    } else {
-      baseExpenses = activeWeekData.items;
-    }
+    baseExpenses = activeWeekData.items;
   }
 
   const filteredExpenses = baseExpenses.filter((e) => {
@@ -311,10 +303,7 @@ export default function MonthOverview({
           <div className="flex items-center gap-1.5 overflow-x-auto hide-scrollbar py-1 -mx-1 px-1">
             {/* All Weeks Overview Pill */}
             <button
-              onClick={() => {
-                setSelectedWeek('all');
-                setSelectedDay(null);
-              }}
+              onClick={() => setSelectedWeek('all')}
               className={`px-3 py-1.5 rounded-2xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all duration-200 active:scale-95 ${
                 selectedWeek === 'all'
                   ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black shadow-md shadow-emerald-500/25'
@@ -331,10 +320,7 @@ export default function MonthOverview({
               return (
                 <button
                   key={w.weekNum}
-                  onClick={() => {
-                    setSelectedWeek(w.weekNum);
-                    setSelectedDay(null);
-                  }}
+                  onClick={() => setSelectedWeek(w.weekNum)}
                   className={`px-3 py-1.5 rounded-2xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all duration-200 active:scale-95 ${
                     isSelected
                       ? 'bg-emerald-600 text-white dark:bg-emerald-500 dark:text-slate-950 font-black shadow-md shadow-emerald-500/25'
@@ -530,34 +516,19 @@ export default function MonthOverview({
                 <span className="font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   {activeWeekData.daysCount}-Day Daily Breakdown
                 </span>
-                {selectedDay !== null ? (
-                  <button
-                    onClick={() => setSelectedDay(null)}
-                    className="text-[10px] font-bold text-rose-500 flex items-center gap-1 hover:underline"
-                  >
-                    <span>Clear Day Filter</span>
-                    <X size={12} />
-                  </button>
-                ) : (
-                  <span className="text-[10px] text-slate-400">Tap day to filter activity</span>
-                )}
+                <span className="text-[10px] text-slate-400">
+                  {activeWeekData.startDayName} to {activeWeekData.endDayName}
+                </span>
               </div>
 
               <div className="grid grid-flow-col auto-cols-fr gap-1.5 items-end h-28 pt-4 pb-1">
                 {activeWeekData.dayBreakdown.map((d) => {
                   const heightPercent = d.amount > 0 ? Math.max(16, Math.round((d.amount / maxDaySpend) * 100)) : 8;
-                  const isDaySelected = selectedDay === d.day;
 
                   return (
-                    <button
+                    <div
                       key={d.day}
-                      type="button"
-                      onClick={() => {
-                        setSelectedDay(prev => prev === d.day ? null : d.day);
-                      }}
-                      className={`flex flex-col items-center justify-end h-full group transition-all duration-200 relative ${
-                        isDaySelected ? 'scale-105' : 'hover:opacity-90'
-                      }`}
+                      className="flex flex-col items-center justify-end h-full relative"
                     >
                       {/* Tooltip / Amount text on top */}
                       {d.amount > 0 && (
@@ -570,9 +541,7 @@ export default function MonthOverview({
                       <div className="w-full max-w-[28px] h-16 flex items-end justify-center rounded-xl overflow-hidden bg-slate-200/80 dark:bg-white/[0.05] p-0.5">
                         <div
                           className={`w-full rounded-lg transition-all duration-300 ${
-                            isDaySelected
-                              ? 'bg-gradient-to-t from-emerald-500 to-teal-300 ring-2 ring-emerald-400 shadow-md'
-                              : d.unnecessaryAmount > 0
+                            d.unnecessaryAmount > 0
                               ? 'bg-gradient-to-t from-rose-500 to-amber-400'
                               : d.amount > 0
                               ? 'bg-gradient-to-t from-emerald-600 to-teal-400'
@@ -587,8 +556,6 @@ export default function MonthOverview({
                         <span className={`text-[10px] font-bold block ${
                           d.isToday
                             ? 'text-emerald-600 dark:text-emerald-400 font-extrabold'
-                            : isDaySelected
-                            ? 'text-slate-900 dark:text-white font-black'
                             : 'text-slate-500 dark:text-slate-400'
                         }`}>
                           {d.dayName}
@@ -599,17 +566,10 @@ export default function MonthOverview({
                           {d.day}
                         </span>
                       </div>
-                    </button>
+                    </div>
                   );
                 })}
               </div>
-
-              {/* Notice if filtered by a specific day */}
-              {selectedDay !== null && (
-                <div className="mt-2 text-center py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[11px] font-bold text-emerald-700 dark:text-emerald-300">
-                  Showing transactions for {activeWeekData.dayBreakdown.find(d => d.day === selectedDay)?.dayName}, {selectedDay} {monthShortName}
-                </div>
-              )}
             </div>
           </div>
         </div>
