@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Check, Flame, Calendar, CreditCard } from 'lucide-react';
+import { X, Check, AlertCircle, Sparkles, Calendar, Tag, CreditCard, ChevronDown } from 'lucide-react';
 import { CATEGORIES } from '../utils/categories';
 import CategoryIcon from './CategoryIcon';
 
@@ -62,47 +62,33 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 backdrop-blur-sm transition-all">
-      <div className="w-full max-w-md bg-[#FFFDF8] dark:bg-[#131317] border-t-2 border-x-2 border-[#141418] dark:border-white/[0.15] rounded-t-[30px] p-5 shadow-2xl max-h-[92vh] overflow-y-auto hide-scrollbar animate-sheet">
-        {/* Grabber Pill */}
-        <div className="w-12 h-1.5 bg-[#141418]/20 dark:bg-white/20 rounded-full mx-auto mb-4" />
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 backdrop-blur-md transition-all">
+      <div className="w-full max-w-md bg-white dark:bg-slate-900 border-t border-x border-slate-200 dark:border-white/[0.12] rounded-t-[36px] p-5 shadow-2xl max-h-[92vh] overflow-y-auto hide-scrollbar animate-sheet">
+        {/* Drawer Grabber Bar */}
+        <div className="w-12 h-1.5 bg-slate-300 dark:bg-white/20 rounded-full mx-auto mb-4" />
 
-        {/* Slip Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-dashed border-[#141418]/15 dark:border-white/[0.1]">
-          <div className="flex items-center gap-2.5">
-            <span
-              className={`w-2.5 h-2.5 rounded-full animate-pulse ${
-                isUnnecessary ? 'bg-[#FF4D3D]' : 'bg-[#C8FF2E]'
-              }`}
-            />
-            <div>
-              <h2 className="font-display text-base font-extrabold text-[#141418] dark:text-[#F5F4F0] leading-none">
-                New Expense Slip
-              </h2>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#8E8E98]">
-                {isUnnecessary ? 'FLAGGED AS AVOIDABLE LEAK' : 'STANDARD LEDGER ENTRY'}
-              </span>
-            </div>
+        {/* Modal Header */}
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-white/[0.08]">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <h2 className="text-base font-extrabold text-slate-900 dark:text-white">Record Daily Expense</h2>
           </div>
-
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-xl bg-[#E7E1D3] dark:bg-white/[0.08] flex items-center justify-center text-[#141418] dark:text-[#D4D4DC] hover:bg-[#141418] hover:text-white active:scale-90 transition-all"
+            className="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/[0.06] flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white active:scale-90 transition-all"
           >
-            <X size={16} strokeWidth={2.5} />
+            <X size={18} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          {/* Obsidian Amount Terminal */}
-          <div className="text-center py-4 px-3 rounded-2xl atelier-vault text-[#F5F4F0]">
-            <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-[#8E8E98] uppercase block mb-1.5">
-              ENTER AMOUNT (INR)
+          {/* Big Amount Field */}
+          <div className="text-center py-4 px-3 bg-slate-50 dark:bg-white/[0.03] rounded-3xl border border-slate-200 dark:border-white/[0.08]">
+            <span className="text-[11px] font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase block mb-1">
+              Enter Amount
             </span>
             <div className="flex items-center justify-center">
-              <span className={`font-mono text-3xl font-extrabold mr-1.5 ${isUnnecessary ? 'text-[#FF4D3D]' : 'text-[#C8FF2E]'}`}>
-                ₹
-              </span>
+              <span className="text-3xl font-black text-emerald-500 dark:text-emerald-400 mr-1.5">₹</span>
               <input
                 type="number"
                 step="any"
@@ -112,18 +98,18 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
                 placeholder="0"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-48 font-display text-4xl font-extrabold text-[#F5F4F0] tabular-nums bg-transparent border-none text-center focus:outline-none placeholder-white/20"
+                className="w-48 text-4xl font-black text-slate-900 dark:text-white bg-transparent border-none text-center focus:outline-none placeholder-slate-400 dark:placeholder-slate-700"
               />
             </div>
 
-            {/* Quick Increment Keys */}
-            <div className="flex items-center justify-center gap-1.5 mt-3.5 pt-3 ticket-divider">
+            {/* Quick Increment Chips */}
+            <div className="flex items-center justify-center gap-1.5 mt-3 pt-3 border-t border-slate-200 dark:border-white/[0.05]">
               {QUICK_AMOUNTS.map((val) => (
                 <button
                   type="button"
                   key={val}
                   onClick={() => handleAddQuickAmount(val)}
-                  className="px-2.5 py-1 rounded-lg font-mono text-[11px] font-bold bg-white/[0.07] text-[#F5F4F0] hover:bg-[#C8FF2E] hover:text-[#0A0A0C] border border-white/[0.1] active:scale-90 transition-all"
+                  className="px-2.5 py-1 rounded-xl text-xs font-bold bg-white dark:bg-white/[0.05] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.06] active:scale-90 transition-all shadow-sm"
                 >
                   +{val}
                 </button>
@@ -131,86 +117,79 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
             </div>
           </div>
 
-          {/* Description */}
+          {/* Title */}
           <div>
-            <label className="font-mono text-[10px] font-extrabold uppercase tracking-widest text-[#6B6A64] dark:text-[#8E8E98] block mb-1.5">
-              Description / Merchant
-            </label>
+            <label className="text-xs font-extrabold text-slate-700 dark:text-slate-300 block mb-1.5">Expense Description</label>
             <input
               type="text"
               required
-              placeholder="e.g. Swiggy Lunch, Petrol, Movie Ticket, Groceries"
+              placeholder="e.g. Swiggy Lunch, Fuel, Movie Ticket, Groceries"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-3 bg-[#F3EFE6] dark:bg-[#19191F] border border-[#141418]/15 dark:border-white/[0.1] rounded-xl text-[#141418] dark:text-[#F5F4F0] text-xs font-semibold placeholder-[#8E8E98] focus:outline-none focus:border-[#141418] dark:focus:border-[#C8FF2E] transition-all"
+              className="w-full px-4 py-3 bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-2xl text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-white/[0.06] transition-all"
             />
           </div>
 
-          {/* Tactile Leak Detector Toggle Card */}
+          {/* TACTILE UNNECESSARY SPEND TOGGLE */}
           <div
-            className={`p-4 rounded-2xl border transition-all duration-200 ${
+            className={`p-4 rounded-[26px] border transition-all duration-300 ${
               isUnnecessary
-                ? 'bg-[#FF4D3D]/10 border-[#FF4D3D] hazard-stripe'
-                : 'bg-[#F3EFE6] dark:bg-[#19191F] border-[#141418]/12 dark:border-white/[0.08]'
+                ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-500/50 shadow-xl shadow-rose-950/10 dark:shadow-rose-950/30'
+                : 'bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/[0.08]'
             }`}
           >
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
-                    isUnnecessary
-                      ? 'bg-[#FF4D3D] text-white'
-                      : 'bg-[#E7E1D3] dark:bg-white/[0.07] text-[#6B6A64] dark:text-[#8E8E98]'
+                  className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-colors ${
+                    isUnnecessary ? 'bg-rose-500 text-white' : 'bg-slate-200 dark:bg-white/[0.06] text-slate-500 dark:text-slate-400'
                   }`}
                 >
-                  <Flame size={19} strokeWidth={2.5} />
+                  <AlertCircle size={20} strokeWidth={2.4} />
                 </div>
                 <div>
-                  <h4 className="font-display text-xs font-extrabold text-[#141418] dark:text-[#F5F4F0] flex items-center gap-1.5">
-                    Avoidable / Impulse Leak?
+                  <h4 className="text-xs font-black text-slate-900 dark:text-white flex items-center gap-1.5">
+                    Avoidable / Impulse Spend?
                     {isUnnecessary && (
-                      <span className="font-mono text-[8px] bg-[#FF4D3D] text-white px-1.5 py-0.5 rounded-md font-extrabold">
-                        FLAGGED
+                      <span className="text-[9px] bg-rose-500 text-white px-2 py-0.5 rounded-full font-black animate-pulse">
+                        LEAK FLAGGED
                       </span>
                     )}
                   </h4>
-                  <p className="text-[11px] text-[#6B6A64] dark:text-[#8E8E98] font-medium">
-                    Craving, impulse, or skip-worthy spend?
-                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Was this an impulse, craving, or extra expense?</p>
                 </div>
               </div>
 
-              {/* Hardware Toggle Switch */}
+              {/* Native-feel switch */}
               <button
                 type="button"
                 onClick={() => setIsUnnecessary(!isUnnecessary)}
-                className={`relative inline-flex h-7 w-12 flex-shrink-0 cursor-pointer rounded-full border-2 border-[#141418] transition-colors duration-200 focus:outline-none ${
-                  isUnnecessary ? 'bg-[#FF4D3D]' : 'bg-[#D6CEBC] dark:bg-[#2A2A35]'
+                className={`relative inline-flex h-7 w-12 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                  isUnnecessary ? 'bg-rose-500' : 'bg-slate-300 dark:bg-slate-800'
                 }`}
               >
                 <span
-                  className={`pointer-events-none inline-block h-5 w-5 mt-[2px] transform rounded-full bg-[#FFFDF8] shadow-md transition duration-200 ${
-                    isUnnecessary ? 'translate-x-5' : 'translate-x-0.5'
+                  className={`pointer-events-none inline-block h-6 w-6 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${
+                    isUnnecessary ? 'translate-x-5' : 'translate-x-0'
                   }`}
                 />
               </button>
             </div>
 
+            {/* Quick Reason selector */}
             {isUnnecessary && (
-              <div className="mt-3.5 pt-3 border-t border-dashed border-[#FF4D3D]/35 animate-fade-in">
-                <label className="font-mono text-[10px] font-extrabold uppercase tracking-wider text-[#E03424] dark:text-[#FF7A6E] block mb-2">
-                  Select Leak Trigger
-                </label>
+              <div className="mt-3.5 pt-3 border-t border-rose-200 dark:border-rose-500/20 animate-fade-in">
+                <label className="text-[11px] font-bold text-rose-600 dark:text-rose-300 block mb-2">Why was this unnecessary?</label>
                 <div className="flex flex-wrap gap-1.5">
                   {UNNECESSARY_REASONS.map((reason) => (
                     <button
                       type="button"
                       key={reason}
                       onClick={() => setUnnecessaryReason(reason)}
-                      className={`font-mono text-[10px] px-2.5 py-1.5 rounded-lg border font-bold transition-all active:scale-95 ${
+                      className={`text-[11px] px-3 py-1.5 rounded-xl border font-bold transition-all active:scale-95 ${
                         unnecessaryReason === reason
-                          ? 'bg-[#FF4D3D] text-white border-[#141418]'
-                          : 'bg-[#FFFDF8] dark:bg-[#131317] text-[#E03424] dark:text-[#FF7A6E] border-[#FF4D3D]/35'
+                          ? 'bg-rose-500 text-white border-rose-400 shadow-md'
+                          : 'bg-rose-100 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-500/20'
                       }`}
                     >
                       {reason}
@@ -223,10 +202,8 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
 
           {/* Category Picker Grid */}
           <div>
-            <label className="font-mono text-[10px] font-extrabold uppercase tracking-widest text-[#6B6A64] dark:text-[#8E8E98] block mb-1.5">
-              Category
-            </label>
-            <div className="grid grid-cols-2 gap-2 max-h-44 overflow-y-auto pr-0.5">
+            <label className="text-xs font-extrabold text-slate-700 dark:text-slate-300 block mb-1.5">Category</label>
+            <div className="grid grid-cols-2 gap-2 max-h-44 overflow-y-auto pr-1">
               {CATEGORIES.map((cat) => {
                 const isSelected = category === cat.name;
                 return (
@@ -234,14 +211,14 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
                     type="button"
                     key={cat.name}
                     onClick={() => setCategory(cat.name)}
-                    className={`flex items-center gap-2 p-2.5 rounded-xl text-left border transition-all active:scale-95 ${
+                    className={`flex items-center gap-2 p-2.5 rounded-2xl text-left border transition-all active:scale-95 ${
                       isSelected
-                        ? 'bg-[#141418] text-[#C8FF2E] dark:bg-[#C8FF2E] dark:text-[#0A0A0C] font-extrabold border-[#141418]'
-                        : 'bg-[#F3EFE6] dark:bg-[#19191F] border-[#141418]/10 dark:border-white/[0.07] text-[#141418] dark:text-[#D4D4DC]'
+                        ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-black border-slate-900 dark:border-white shadow-lg'
+                        : 'bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/[0.06] text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06]'
                     }`}
                   >
-                    <CategoryIcon category={cat.name} size={14} className="p-1.5 rounded-lg flex-shrink-0" />
-                    <span className="text-[11px] font-bold truncate">{cat.name}</span>
+                    <CategoryIcon category={cat.name} size={15} className="p-1.5 rounded-xl" />
+                    <span className="text-xs truncate">{cat.name}</span>
                   </button>
                 );
               })}
@@ -251,24 +228,24 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
           {/* Date & Payment Mode */}
           <div className="grid grid-cols-2 gap-2.5">
             <div>
-              <label className="font-mono text-[10px] font-extrabold uppercase tracking-wider text-[#6B6A64] dark:text-[#8E8E98] flex items-center gap-1 mb-1">
-                <Calendar size={11} /> Date
+              <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-1">
+                <Calendar size={12} /> Date
               </label>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full px-3 py-2.5 bg-[#F3EFE6] dark:bg-[#19191F] border border-[#141418]/14 dark:border-white/[0.09] rounded-xl font-mono text-xs font-bold text-[#141418] dark:text-[#F5F4F0] focus:outline-none focus:border-[#141418] dark:focus:border-[#C8FF2E]"
+                className="w-full px-3 py-2.5 bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-2xl text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
               />
             </div>
             <div>
-              <label className="font-mono text-[10px] font-extrabold uppercase tracking-wider text-[#6B6A64] dark:text-[#8E8E98] flex items-center gap-1 mb-1">
-                <CreditCard size={11} /> Mode
+              <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-1">
+                <CreditCard size={12} /> Mode
               </label>
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full px-3 py-2.5 bg-[#F3EFE6] dark:bg-[#19191F] border border-[#141418]/14 dark:border-white/[0.09] rounded-xl font-mono text-xs font-bold text-[#141418] dark:text-[#F5F4F0] focus:outline-none focus:border-[#141418] dark:focus:border-[#C8FF2E]"
+                className="w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/[0.08] rounded-2xl text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
               >
                 <option value="UPI / Online">UPI / GPay / PhonePe</option>
                 <option value="Cash">Cash</option>
@@ -279,19 +256,19 @@ export default function QuickAddModal({ isOpen, onClose, onSave }) {
             </div>
           </div>
 
-          {/* Tactile Submit Shutter Key */}
-          <div className="pt-1">
+          {/* Submit */}
+          <div className="pt-2">
             <button
               type="submit"
               disabled={isSubmitting || !amount || !title}
-              className={`w-full py-4 rounded-2xl font-mono font-extrabold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
+              className={`w-full py-4 rounded-2xl font-black text-sm flex items-center justify-center gap-2 text-slate-950 shadow-xl transition-all active:scale-[0.97] ${
                 isUnnecessary
-                  ? 'bg-[#FF4D3D] text-white border-2 border-[#141418] shadow-[0_4px_0_#991B1B] active:translate-y-[3px]'
-                  : 'shutter-key'
-              }`}
+                  ? 'bg-gradient-to-r from-rose-500 to-red-400 shadow-rose-500/25 text-white'
+                  : 'bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-300 shadow-emerald-500/25'
+              } disabled:opacity-40 disabled:cursor-not-allowed`}
             >
-              <Check size={17} strokeWidth={3} />
-              <span>{isSubmitting ? 'STAMPING...' : isUnnecessary ? 'LOG AS LEAK' : 'STAMP TO LEDGER'}</span>
+              <Check size={18} strokeWidth={3} />
+              <span>{isSubmitting ? 'Recording...' : 'Save Expense'}</span>
             </button>
           </div>
         </form>

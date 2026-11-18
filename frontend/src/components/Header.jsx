@@ -5,80 +5,75 @@ export default function Header({ dbStatus, theme, onToggleTheme, onSeedDemo, has
   const isDark = theme === 'dark';
 
   return (
-    <header className="sticky top-0 z-40 px-4 py-3 atelier-header transition-colors duration-200">
+    <header className="sticky top-0 z-40 px-4 pt-3 pb-2.5 glass-surface border-b border-slate-200/80 dark:border-white/[0.06] backdrop-blur-2xl transition-colors duration-200">
       <div className="max-w-md mx-auto flex items-center justify-between">
-        {/* Left: Atelier Brand Stamp */}
+        {/* Left: Avatar & Greeting */}
         <div className="flex items-center gap-3">
-          <div className="relative group">
-            <div className="w-10 h-10 rounded-xl bg-[#C8FF2E] border-2 border-[#0A0A0C] flex items-center justify-center shadow-[0_3px_0_#0A0A0C] dark:shadow-[0_3px_0_#6B8F00] transition-transform group-hover:-rotate-3">
-              <span className="font-display font-extrabold text-xl text-[#0A0A0C] leading-none">₹</span>
+          <div className="relative">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-400 p-[2px] shadow-lg shadow-emerald-500/20">
+              <div className="w-full h-full bg-slate-50 dark:bg-slate-950 rounded-[14px] flex items-center justify-center font-extrabold text-base text-emerald-600 dark:text-emerald-400">
+                ₹
+              </div>
             </div>
             <span
-              className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-[#F3EFE6] dark:border-[#0A0A0C] ${
-                dbStatus.dbConnected ? 'bg-[#22C55E] animate-pulse' : 'bg-[#FFB830]'
+              className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-slate-100 dark:border-slate-950 ${
+                dbStatus.dbConnected ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'
               }`}
-              title={dbStatus.dbConnected ? 'Atlas Connected' : 'Local Mode'}
             />
           </div>
 
           <div>
             <div className="flex items-center gap-1.5">
-              <h1 className="font-display text-base font-extrabold tracking-tight text-[#141418] dark:text-[#F5F4F0] leading-none">
-                PennyWise
-              </h1>
-              <span className="font-mono text-[9px] font-bold tracking-widest uppercase px-1.5 py-0.5 rounded-md bg-[#141418] text-[#C8FF2E] dark:bg-white/[0.08] dark:text-[#C8FF2E] border border-[#141418]/10 dark:border-white/[0.08]">
-                LEDGER
+              <h1 className="text-sm font-extrabold text-slate-900 dark:text-white tracking-tight">PennyWise</h1>
+              <span className="text-[9px] font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-white/[0.08] text-slate-700 dark:text-slate-300 border border-slate-300/80 dark:border-white/[0.06]">
+                MOBILE
               </span>
             </div>
-            <p className="font-mono text-[10px] text-[#6B6A64] dark:text-[#8E8E98] tracking-wide mt-0.5">
-              INR // WEALTH &amp; LEAK RADAR
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">
+              <span>Smart Wealth & Waste</span>
             </p>
           </div>
         </div>
 
-        {/* Right: Hardware Status + Theme Flip */}
+        {/* Right: Actions */}
         <div className="flex items-center gap-2">
-          {/* Status Indicator Chip */}
+          {/* MongoDB Atlas Status Pill */}
           <div
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl font-mono text-[10px] font-bold uppercase tracking-wider border transition-all ${
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
               dbStatus.dbConnected
-                ? 'bg-[#22C55E]/10 text-[#16794B] dark:text-[#C8FF2E] border-[#22C55E]/30'
-                : 'bg-[#FFB830]/15 text-[#9A6300] dark:text-[#FFB830] border-[#FFB830]/35'
+                ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30'
+                : 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30'
             }`}
           >
-            <span
-              className={`w-1.5 h-1.5 rounded-full ${
-                dbStatus.dbConnected ? 'bg-[#22C55E] animate-pulse' : 'bg-[#FFB830]'
-              }`}
-            />
-            <span>{dbStatus.dbConnected ? 'Atlas' : 'Local'}</span>
+            <span className={`w-1.5 h-1.5 rounded-full ${dbStatus.dbConnected ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'}`} />
+            <span className="text-[11px] font-bold">{dbStatus.dbConnected ? 'Atlas Cloud' : 'Local Storage'}</span>
           </div>
 
           {!hasExpenses && (
             <button
               onClick={onSeedDemo}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl font-mono text-[10px] font-bold uppercase tracking-wider bg-[#7C7CFF]/15 text-[#4B4BC7] dark:text-[#B3B3FF] border border-[#7C7CFF]/35 active:scale-95 transition-all"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30 active:scale-95 transition-all shadow-sm shadow-indigo-500/20"
             >
-              <Sparkles size={11} />
+              <Sparkles size={12} className="text-indigo-500 dark:text-indigo-400" />
               <span>Demo</span>
             </button>
           )}
 
-          {/* Tactile Theme Toggle Key */}
+          {/* THEME TOGGLE BUTTON (Replaces the Settings Icon) */}
           <button
             onClick={onToggleTheme}
-            className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all duration-200 active:translate-y-[1px] ${
+            className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all duration-200 active:scale-90 shadow-sm ${
               isDark
-                ? 'bg-[#19191F] border-white/[0.12] text-[#C8FF2E] hover:border-[#C8FF2E]/50'
-                : 'bg-[#FFFDF8] border-[#141418]/20 text-[#141418] shadow-[0_2px_0_rgba(20,20,24,0.12)] hover:border-[#141418]'
+                ? 'bg-amber-500/10 border-amber-500/25 text-amber-400 hover:bg-amber-500/20 hover:text-amber-300'
+                : 'bg-indigo-500/10 border-indigo-500/25 text-indigo-600 hover:bg-indigo-500/20 hover:text-indigo-700'
             }`}
-            title={isDark ? 'Switch to Parchment Light' : 'Switch to Obsidian Dark'}
+            title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             aria-label="Toggle Dark and Light Mode"
           >
             {isDark ? (
-              <Sun size={16} strokeWidth={2.4} className="transition-transform hover:rotate-45" />
+              <Sun size={18} strokeWidth={2.4} className="text-amber-400 transition-transform hover:rotate-45" />
             ) : (
-              <Moon size={16} strokeWidth={2.4} className="transition-transform hover:-rotate-12" />
+              <Moon size={18} strokeWidth={2.4} className="text-indigo-600 transition-transform hover:-rotate-12" />
             )}
           </button>
         </div>

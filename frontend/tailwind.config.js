@@ -8,40 +8,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        obsidian: {
-          950: '#0A0A0C',
-          900: '#131317',
-          850: '#19191F',
-          800: '#212129',
+        brand: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
         },
-        parchment: {
-          50: '#FFFDF8',
-          100: '#F3EFE6',
-          200: '#E7E1D3',
-          300: '#D6CEBC',
-        },
-        limeSignal: {
-          DEFAULT: '#C8FF2E',
-          dark: '#9ED400',
-          deep: '#16794B',
-        },
-        vermilion: {
-          DEFAULT: '#FF4D3D',
-          dark: '#E03424',
-          soft: '#FF7A6E',
-        },
-        cobalt: {
-          DEFAULT: '#7C7CFF',
-          dark: '#5555E6',
-        },
-        marigold: {
-          DEFAULT: '#FFB830',
+        waste: {
+          50: '#fff1f2',
+          100: '#ffe4e6',
+          500: '#f43f5e',
+          600: '#e11d48',
+          700: '#be123c',
         }
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       }
     },
   },

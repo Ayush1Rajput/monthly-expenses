@@ -13,7 +13,8 @@ import {
   fetchMonthlyAnalytics,
   fetchYearlyAnalytics,
   checkHealth,
-  seedSampleData
+  seedSampleData,
+  saveLocalExpenses
 } from './services/api';
 
 export default function App() {
@@ -56,10 +57,6 @@ export default function App() {
       root.classList.add('light');
       root.classList.remove('dark');
     }
-    const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) {
-      metaTheme.setAttribute('content', theme === 'dark' ? '#0A0A0C' : '#F3EFE6');
-    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -77,15 +74,19 @@ export default function App() {
       const health = await checkHealth();
       setDbStatus(health);
 
+      // Load expenses for current month
       const currentMonthExpenses = await fetchExpenses({ month: currentMonth, year: currentYear });
       setExpenses(currentMonthExpenses || []);
 
+      // Load all expenses for history view
       const all = await fetchExpenses({});
       setAllExpenses(all || []);
 
+      // Load monthly analytics
       const mAnalytics = await fetchMonthlyAnalytics(currentMonth, currentYear);
       setMonthlyAnalytics(mAnalytics);
 
+      // Load yearly analytics
       const yAnalytics = await fetchYearlyAnalytics(currentYear);
       setYearlyAnalytics(yAnalytics);
     } catch (err) {
@@ -102,11 +103,11 @@ export default function App() {
     try {
       const result = await createExpense(data);
       if (result && result.synced) {
-        showToast('Synced to Atlas Cloud');
+        showToast('Saved to MongoDB Atlas Cloud! ☁️✅');
       } else if (data.isUnnecessary) {
-        showToast('Logged & flagged as Avoidable Leak');
+        showToast('Saved locally & flagged as Extra Spend ⚠️');
       } else {
-        showToast('Expense logged to ledger');
+        showToast('Expense recorded successfully! ✅');
       }
       await loadData();
     } catch (err) {
@@ -118,7 +119,7 @@ export default function App() {
   const handleDeleteExpense = async (id) => {
     if (window.confirm('Are you sure you want to delete this expense?')) {
       await deleteExpense(id);
-      showToast('Entry removed from ledger');
+      showToast('Expense removed 🗑️');
       loadData();
     }
   };
@@ -127,7 +128,7 @@ export default function App() {
   const handleSeedDemo = async () => {
     try {
       await seedSampleData();
-      showToast('12-Month Sample Ledger Loaded');
+      showToast('Loaded 12-Month Sample Data! Check out Yearly Review 🎉');
       loadData();
     } catch (err) {
       showToast('Failed to seed demo data');
@@ -137,16 +138,16 @@ export default function App() {
   const wasteCount = expenses.filter(e => e.isUnnecessary).length;
 
   return (
-    <div className="min-h-screen flex flex-col font-sans selection:bg-[#C8FF2E] selection:text-[#0A0A0C]">
-      {/* Editorial Ticker Toast Notification */}
+    <div className="min-h-screen bg-slate-100 dark:bg-[#030712] text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-200">
+      {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-[72px] left-1/2 -translate-x-1/2 z-50 bg-[#141418] text-[#F5F4F0] border border-[#C8FF2E]/50 px-4 py-2 rounded-full shadow-2xl text-[11px] font-mono font-bold tracking-wide uppercase animate-fade-in flex items-center gap-2 whitespace-nowrap">
-          <span className="w-2 h-2 rounded-full bg-[#C8FF2E] animate-pulse" />
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 z-50 glass-surface-active border border-emerald-500/40 text-emerald-800 dark:text-emerald-300 px-4 py-2 rounded-2xl shadow-2xl text-xs font-black animate-fade-in flex items-center gap-2 backdrop-blur-2xl">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Atelier Header */}
+      {/* Top Header with Dark/Light Theme Toggle */}
       <Header
         dbStatus={dbStatus}
         theme={theme}
@@ -155,8 +156,8 @@ export default function App() {
         hasExpenses={allExpenses.length > 0}
       />
 
-      {/* Main Content Area (Mobile-first focused column) */}
-      <main className="flex-1 w-full max-w-md mx-auto px-4 pt-4 pb-10">
+      {/* Main Content Area (Mobile smartphone container) */}
+      <main className="flex-1 w-full max-w-md mx-auto px-4 pt-3 pb-8">
         {activeTab === 'overview' && (
           <MonthOverview
             analytics={monthlyAnalytics}
@@ -205,7 +206,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Bottom Floating Hardware Dock */}
+      {/* Bottom Mobile Navigation */}
       <BottomNav
         activeTab={activeTab}
         onTabChange={(tab) => setActiveTab(tab)}
@@ -215,7 +216,7 @@ export default function App() {
         viewMode={viewMode}
       />
 
-      {/* Quick Add Expense Slip Modal */}
+      {/* Quick Add Bottom Sheet Modal */}
       <QuickAddModal
         isOpen={isAddOpen}
         onClose={() => setIsAddOpen(false)}
