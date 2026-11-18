@@ -10,55 +10,58 @@ import {
   Bar,
   PieChart,
   Pie,
-  Cell
+  Cell,
+  CartesianGrid
 } from 'recharts';
 import confetti from 'canvas-confetti';
 import {
   Sparkles,
   Trophy,
-  Calendar,
   AlertTriangle,
   TrendingUp,
-  PieChart as PieIcon,
-  Flame,
-  Award,
-  ChevronRight,
-  TrendingDown,
-  Percent
+  PieChart as PieIcon
 } from 'lucide-react';
 import { formatINR, getCategoryMeta } from '../utils/categories';
 import CategoryIcon from './CategoryIcon';
 
-export default function YearlyReview({ yearlyData, selectedYear, onYearChange, onSelectMonth }) {
+export default function YearlyReview({ yearlyData, selectedYear, onYearChange, onSelectMonth, theme }) {
   const [activeView, setActiveView] = useState('trends'); // 'trends' | 'categories' | 'wrapped'
-  
+  const isDark = theme === 'dark';
+
   const trends = yearlyData?.monthlyTrends || [];
   const categories = yearlyData?.categoryDistribution || [];
   const review = yearlyData?.yearInReview || {};
 
   const triggerConfetti = () => {
     confetti({
-      particleCount: 90,
+      particleCount: 95,
       spread: 75,
-      origin: { y: 0.6 }
+      colors: ['#C8FF2E', '#FF4D3D', '#7C7CFF', '#FFB830', '#F5F4F0'],
+      origin: { y: 0.62 }
     });
   };
 
   const currentYear = new Date().getFullYear();
   const yearOptions = [currentYear, currentYear - 1, currentYear - 2];
 
+  const essentialStroke = isDark ? '#C8FF2E' : '#16794B';
+  const gridStroke = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(20,20,24,0.08)';
+  const axisStroke = isDark ? '#8E8E98' : '#6B6A64';
+
+  const peakMonthName = review.highestMonth?.name;
+
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-white/[0.1] p-3 rounded-2xl shadow-2xl backdrop-blur-xl text-xs">
-          <p className="font-extrabold text-slate-900 dark:text-white mb-1.5">{label}</p>
+        <div className="bg-[#141418] text-[#F5F4F0] border border-white/[0.15] p-3 rounded-xl shadow-2xl font-mono text-[11px]">
+          <p className="font-extrabold text-[#C8FF2E] uppercase tracking-wider mb-1.5">{label}</p>
           {payload.map((entry, index) => (
             <div key={`item-${index}`} className="flex items-center justify-between gap-4 py-0.5">
-              <span className="flex items-center gap-1.5 font-medium" style={{ color: entry.color }}>
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: entry.color }} />
-                {entry.name}:
+              <span className="flex items-center gap-1.5 text-[#A2A2AE]">
+                <span className="w-2 h-2 rounded-[2px]" style={{ backgroundColor: entry.color }} />
+                {entry.name}
               </span>
-              <span className="font-black text-slate-900 dark:text-white">{formatINR(entry.value)}</span>
+              <span className="font-extrabold text-[#F5F4F0] tabular-nums">{formatINR(entry.value)}</span>
             </div>
           ))}
         </div>
@@ -69,18 +72,17 @@ export default function YearlyReview({ yearlyData, selectedYear, onYearChange, o
 
   return (
     <div className="space-y-4 pb-24 animate-fade-in">
-      {/* 1. Year Selector & Segmented View Switcher */}
+      {/* 1. Year Selector & Hardware View Switcher */}
       <div className="flex items-center justify-between gap-2">
-        {/* Year Pills */}
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] p-1 rounded-2xl">
+        <div className="flex items-center gap-1 p-1 rounded-xl bg-[#E7E1D3] dark:bg-[#131317] border border-[#141418]/12 dark:border-white/[0.08]">
           {yearOptions.map((y) => (
             <button
               key={y}
               onClick={() => onYearChange(y)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all active:scale-95 ${
+              className={`px-2.5 py-1.5 rounded-lg font-mono text-[11px] font-extrabold transition-all active:scale-95 ${
                 selectedYear === y
-                  ? 'bg-emerald-500 text-slate-950 shadow-md'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#141418] text-[#C8FF2E] dark:bg-[#C8FF2E] dark:text-[#0A0A0C]'
+                  : 'text-[#6B6A64] dark:text-[#8E8E98] hover:text-[#141418] dark:hover:text-white'
               }`}
             >
               {y}
@@ -88,89 +90,88 @@ export default function YearlyReview({ yearlyData, selectedYear, onYearChange, o
           ))}
         </div>
 
-        {/* View Switcher */}
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] p-1 rounded-2xl">
+        <div className="flex items-center gap-1 p-1 rounded-xl bg-[#E7E1D3] dark:bg-[#131317] border border-[#141418]/12 dark:border-white/[0.08]">
           <button
             onClick={() => setActiveView('trends')}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 transition-all active:scale-95 ${
+            className={`px-2.5 py-1.5 rounded-lg font-mono text-[10px] font-extrabold uppercase flex items-center gap-1 transition-all active:scale-95 ${
               activeView === 'trends'
-                ? 'bg-white text-slate-950 shadow-md font-extrabold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#FFFDF8] dark:bg-white text-[#0A0A0C] shadow-sm'
+                : 'text-[#6B6A64] dark:text-[#8E8E98]'
             }`}
           >
-            <TrendingUp size={13} />
-            <span>Trend</span>
+            <TrendingUp size={12} />
+            <span>Flow</span>
           </button>
           <button
             onClick={() => setActiveView('categories')}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 transition-all active:scale-95 ${
+            className={`px-2.5 py-1.5 rounded-lg font-mono text-[10px] font-extrabold uppercase flex items-center gap-1 transition-all active:scale-95 ${
               activeView === 'categories'
-                ? 'bg-white text-slate-950 shadow-md font-extrabold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#FFFDF8] dark:bg-white text-[#0A0A0C] shadow-sm'
+                : 'text-[#6B6A64] dark:text-[#8E8E98]'
             }`}
           >
-            <PieIcon size={13} />
-            <span>Pies</span>
+            <PieIcon size={12} />
+            <span>Mix</span>
           </button>
           <button
             onClick={() => {
               setActiveView('wrapped');
               triggerConfetti();
             }}
-            className={`px-2.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 transition-all active:scale-95 ${
+            className={`px-2.5 py-1.5 rounded-lg font-mono text-[10px] font-extrabold uppercase flex items-center gap-1 transition-all active:scale-95 ${
               activeView === 'wrapped'
-                ? 'bg-gradient-to-r from-amber-400 to-rose-400 text-slate-950 shadow-md font-black'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#C8FF2E] text-[#0A0A0C] border border-[#0A0A0C]'
+                : 'text-[#6B6A64] dark:text-[#8E8E98]'
             }`}
           >
-            <Sparkles size={13} />
-            <span>Story</span>
+            <Sparkles size={12} />
+            <span>Pass</span>
           </button>
         </div>
       </div>
 
-      {/* 2. Flagship Annual Card */}
-      <div className="relative overflow-hidden rounded-[32px] p-6 bg-gradient-to-br from-indigo-50 dark:from-indigo-950 via-white dark:via-slate-950 to-indigo-50/30 dark:to-slate-950 border border-indigo-200 dark:border-indigo-500/30 shadow-xl dark:shadow-2xl shadow-indigo-500/10 dark:shadow-indigo-950/30">
-        <div className="absolute top-0 right-0 w-44 h-44 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
+      {/* 2. Flagship Annual Dossier Vault Card */}
+      <div className="relative overflow-hidden rounded-[26px] p-5 atelier-vault-cobalt text-[#F5F4F0]">
         <div className="relative z-10">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[11px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300">
-              {selectedYear} Annual Financial Story
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#B3B3FF]">
+              ANNUAL DOSSIER // {selectedYear}
             </span>
-            <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30 font-bold">
-              {review.totalTransactions || 0} Transactions
+            <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-md bg-white/[0.08] text-[#C8FF2E] border border-white/[0.1] font-bold">
+              {review.totalTransactions || 0} TXNS
             </span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 mt-3">
+          <div className="grid grid-cols-2 gap-3 mt-2">
             <div>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold block">Total Spent</span>
-              <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight mt-0.5">
+              <span className="font-mono text-[9px] uppercase tracking-wider text-[#8E8E98] block">Total Outflow</span>
+              <h2 className="font-display text-3xl font-extrabold text-[#F5F4F0] tracking-tight tabular-nums mt-1">
                 {formatINR(review.totalSpent)}
               </h2>
             </div>
             <div>
-              <span className="text-[11px] text-rose-600 dark:text-rose-400 font-semibold block">Wasted in {selectedYear}</span>
-              <h2 className="text-3xl font-black text-rose-600 dark:text-rose-400 tracking-tight mt-0.5">
+              <span className="font-mono text-[9px] uppercase tracking-wider text-[#FF7A6E] block">Avoidable Burn</span>
+              <h2 className="font-display text-3xl font-extrabold text-[#FF7A6E] tracking-tight tabular-nums mt-1">
                 {formatINR(review.unnecessarySpent)}
               </h2>
-              <span className="text-[10px] text-rose-600/80 dark:text-rose-300/80 font-bold block mt-0.5">
-                ({review.wastePercentage}% of total money)
+              <span className="font-mono text-[9px] text-[#FF7A6E]/80 font-bold block mt-0.5">
+                {review.wastePercentage || 0}% OF ANNUAL
               </span>
             </div>
           </div>
 
-          <div className="mt-4 pt-3.5 border-t border-slate-200 dark:border-white/[0.08] flex items-center justify-between text-xs">
+          <div className="mt-4 pt-3.5 ticket-divider flex items-center justify-between">
             <div>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold block">Monthly Average</span>
-              <span className="font-black text-emerald-600 dark:text-emerald-400">{formatINR(review.monthlyAverage)}/mo</span>
+              <span className="font-mono text-[9px] uppercase tracking-wider text-[#8E8E98] block">Monthly Avg</span>
+              <span className="font-mono text-xs font-extrabold text-[#C8FF2E] tabular-nums">
+                {formatINR(review.monthlyAverage)}/mo
+              </span>
             </div>
             {review.highestMonth && (
               <div className="text-right">
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold block">Peak Month</span>
-                <span className="font-black text-amber-600 dark:text-amber-400">
-                  {review.highestMonth.name} ({formatINR(review.highestMonth.amount)})
+                <span className="font-mono text-[9px] uppercase tracking-wider text-[#8E8E98] block">Peak Month</span>
+                <span className="font-mono text-xs font-extrabold text-[#FFB830] tabular-nums">
+                  {review.highestMonth.name.toUpperCase()} ({formatINR(review.highestMonth.amount)})
                 </span>
               </div>
             )}
@@ -178,92 +179,110 @@ export default function YearlyReview({ yearlyData, selectedYear, onYearChange, o
         </div>
       </div>
 
-      {/* 3. VIEW 1: DYNAMIC 12-MONTH VISUAL TRENDS */}
+      {/* 3. VIEW 1: 12-MONTH FLOW CHARTS */}
       {activeView === 'trends' && (
         <div className="space-y-4">
-          {/* 12-Month Area Chart */}
-          <div className="p-5 rounded-[28px] glass-card-interactive border border-slate-200 dark:border-white/[0.08]">
+          <div className="p-5 rounded-[24px] atelier-card">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider">
-                  12-Month Spending Flow
+                <h3 className="font-display text-sm font-extrabold text-[#141418] dark:text-[#F5F4F0]">
+                  12-Month Outflow Curve
                 </h3>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Essential vs Unnecessary monthly curve</p>
+                <p className="font-mono text-[10px] text-[#6B6A64] dark:text-[#8E8E98]">
+                  ESSENTIAL VS LEAK TRAJECTORY
+                </p>
               </div>
-              <div className="flex items-center gap-2 text-[10px] font-bold">
-                <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400" /> Essential
+              <div className="flex items-center gap-2.5 font-mono text-[9px] font-bold uppercase">
+                <span className="flex items-center gap-1 text-[#16794B] dark:text-[#C8FF2E]">
+                  <span className="w-2 h-2 rounded-[2px]" style={{ backgroundColor: essentialStroke }} /> Ess
                 </span>
-                <span className="flex items-center gap-1 text-rose-600 dark:text-rose-400">
-                  <span className="w-2 h-2 rounded-full bg-rose-500 dark:bg-rose-400" /> Waste
+                <span className="flex items-center gap-1 text-[#E03424] dark:text-[#FF7A6E]">
+                  <span className="w-2 h-2 rounded-[2px] bg-[#FF4D3D]" /> Leak
                 </span>
               </div>
             </div>
 
-            <div className="h-60 w-full mt-2">
+            <div className="h-56 w-full mt-2">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={trends} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <AreaChart data={trends} margin={{ top: 10, right: 8, left: -22, bottom: 0 }}>
                   <defs>
-                    <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.4} />
-                      <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
+                    <linearGradient id="colorEss" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor={essentialStroke} stopOpacity={0.35} />
+                      <stop offset="95%" stopColor={essentialStroke} stopOpacity={0} />
                     </linearGradient>
-                    <linearGradient id="colorWaste" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#F43F5E" stopOpacity={0.6} />
-                      <stop offset="95%" stopColor="#F43F5E" stopOpacity={0} />
+                    <linearGradient id="colorLeak" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#FF4D3D" stopOpacity={0.5} />
+                      <stop offset="95%" stopColor="#FF4D3D" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <XAxis dataKey="month" stroke="#64748B" fontSize={11} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#64748B" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
+                  <CartesianGrid strokeDasharray="3 4" stroke={gridStroke} vertical={false} />
+                  <XAxis dataKey="month" stroke={axisStroke} fontSize={10} tickLine={false} axisLine={false} />
+                  <YAxis stroke={axisStroke} fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
                     type="monotone"
                     dataKey="necessary"
                     name="Essential"
-                    stroke="#10B981"
-                    strokeWidth={3}
+                    stroke={essentialStroke}
+                    strokeWidth={2.5}
                     fillOpacity={1}
-                    fill="url(#colorTotal)"
+                    fill="url(#colorEss)"
                   />
                   <Area
                     type="monotone"
                     dataKey="unnecessary"
-                    name="Unnecessary"
-                    stroke="#F43F5E"
-                    strokeWidth={3}
+                    name="Avoidable"
+                    stroke="#FF4D3D"
+                    strokeWidth={2.5}
                     fillOpacity={1}
-                    fill="url(#colorWaste)"
+                    fill="url(#colorLeak)"
                   />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          {/* Month Comparison Bar Chart */}
-          <div className="p-5 rounded-[28px] glass-card-interactive border border-slate-200 dark:border-white/[0.08]">
-            <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-1">
-              Monthly Comparison (Tap to Drill Down)
-            </h3>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 mb-3">Tap any month bar to jump to that month's details</p>
+          {/* Clickable Month Bar Matrix */}
+          <div className="p-5 rounded-[24px] atelier-card">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <h3 className="font-display text-sm font-extrabold text-[#141418] dark:text-[#F5F4F0]">
+                  Monthly Drill-Down
+                </h3>
+                <p className="font-mono text-[10px] text-[#6B6A64] dark:text-[#8E8E98]">
+                  TAP ANY MONTH BAR TO OPEN LEDGER
+                </p>
+              </div>
+              <span className="font-mono text-[9px] font-bold uppercase px-2 py-0.5 rounded-md bg-[#C8FF2E]/20 text-[#16794B] dark:text-[#C8FF2E]">
+                PEAK HIGHLIGHTED
+              </span>
+            </div>
 
             <div className="h-44 w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={trends} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
-                  <XAxis dataKey="month" stroke="#64748B" fontSize={11} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#64748B" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
+                <BarChart data={trends} margin={{ top: 5, right: 4, left: -24, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 4" stroke={gridStroke} vertical={false} />
+                  <XAxis dataKey="month" stroke={axisStroke} fontSize={10} tickLine={false} axisLine={false} />
+                  <YAxis stroke={axisStroke} fontSize={10} tickLine={false} axisLine={false} tickFormatter={(val) => `₹${val / 1000}k`} />
                   <Tooltip content={<CustomTooltip />} />
                   <Bar
                     dataKey="total"
                     name="Total Spend"
-                    fill="#6366F1"
-                    radius={[8, 8, 2, 2]}
+                    radius={[6, 6, 2, 2]}
                     onClick={(data) => {
                       if (data && data.monthIndex && onSelectMonth) {
                         onSelectMonth(data.monthIndex);
                       }
                     }}
                     cursor="pointer"
-                  />
+                  >
+                    {trends.map((entry, idx) => (
+                      <Cell
+                        key={`bar-${idx}`}
+                        fill={entry.month === peakMonthName ? (isDark ? '#C8FF2E' : '#141418') : '#7C7CFF'}
+                      />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -271,16 +290,19 @@ export default function YearlyReview({ yearlyData, selectedYear, onYearChange, o
         </div>
       )}
 
-      {/* 4. VIEW 2: FULL YEAR CATEGORIES */}
+      {/* 4. VIEW 2: FULL YEAR CATEGORY MIX */}
       {activeView === 'categories' && (
         <div className="space-y-4">
-          <div className="p-5 rounded-[28px] glass-card-interactive border border-slate-200 dark:border-white/[0.08]">
-            <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider mb-2">
-              All Categories in {selectedYear}
+          <div className="p-5 rounded-[24px] atelier-card">
+            <h3 className="font-display text-sm font-extrabold text-[#141418] dark:text-[#F5F4F0] mb-1">
+              {selectedYear} Category Allocation
             </h3>
+            <p className="font-mono text-[10px] text-[#6B6A64] dark:text-[#8E8E98] mb-2">
+              365-DAY SPEND DISTRIBUTION
+            </p>
 
             {categories.length > 0 ? (
-              <div className="h-60 w-full">
+              <div className="relative h-60 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -289,9 +311,10 @@ export default function YearlyReview({ yearlyData, selectedYear, onYearChange, o
                       nameKey="name"
                       cx="50%"
                       cy="50%"
-                      innerRadius={55}
-                      outerRadius={85}
-                      paddingAngle={4}
+                      innerRadius={62}
+                      outerRadius={88}
+                      paddingAngle={3}
+                      stroke="none"
                     >
                       {categories.map((entry, index) => {
                         const meta = getCategoryMeta(entry.name);
@@ -301,106 +324,132 @@ export default function YearlyReview({ yearlyData, selectedYear, onYearChange, o
                     <Tooltip content={<CustomTooltip />} />
                   </PieChart>
                 </ResponsiveContainer>
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#8E8E98]">TOTAL</span>
+                  <span className="font-mono text-sm font-extrabold text-[#141418] dark:text-[#F5F4F0] tabular-nums">
+                    {formatINR(review.totalSpent)}
+                  </span>
+                </div>
               </div>
             ) : (
-              <div className="py-8 text-center text-slate-500 text-xs">No expenses recorded for this year.</div>
+              <div className="py-10 text-center font-mono text-xs text-[#8E8E98]">NO DATA LOGGED FOR {selectedYear}</div>
             )}
           </div>
 
-          {/* Category List */}
           <div className="space-y-2">
-            <h4 className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">
-              Top Spending Slices
+            <h4 className="font-mono text-[10px] font-extrabold uppercase tracking-widest text-[#6B6A64] dark:text-[#8E8E98] px-1">
+              Ranked Slices
             </h4>
-            {categories.map((cat) => (
-              <div key={cat.name} className="p-3.5 glass-card-interactive rounded-2xl border border-slate-200 dark:border-white/[0.06] flex items-center justify-between">
+            {categories.map((cat, idx) => (
+              <div key={cat.name} className="p-3.5 atelier-row rounded-2xl flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <CategoryIcon category={cat.name} size={18} className="p-2.5 rounded-2xl" />
+                  <span className="font-mono text-[10px] font-bold text-[#8E8E98] w-4">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <CategoryIcon category={cat.name} size={16} className="p-2 rounded-xl" />
                   <div>
-                    <h5 className="text-xs font-black text-slate-900 dark:text-white">{cat.name}</h5>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-semibold">{cat.percentage}% of whole year</p>
+                    <h5 className="font-display text-xs font-extrabold text-[#141418] dark:text-[#F5F4F0]">{cat.name}</h5>
+                    <p className="font-mono text-[10px] text-[#6B6A64] dark:text-[#8E8E98]">{cat.percentage}% SHARE</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-xs font-black text-slate-900 dark:text-white">{formatINR(cat.amount)}</span>
-                </div>
+                <span className="font-mono text-xs font-extrabold text-[#141418] dark:text-[#F5F4F0] tabular-nums">
+                  {formatINR(cat.amount)}
+                </span>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* 5. VIEW 3: "YEAR IN REVIEW / STORY WRAPPED" */}
+      {/* 5. VIEW 3: EDITORIAL COLLECTOR PASS ("WRAPPED") */}
       {activeView === 'wrapped' && (
         <div className="space-y-3.5">
-          <div className="text-center py-2">
-            <span className="text-[11px] font-black text-amber-500 dark:text-amber-400 uppercase tracking-widest flex items-center justify-center gap-1.5">
-              <Sparkles size={14} /> Annual Financial Wrapped <Sparkles size={14} />
-            </span>
-            <h3 className="text-xl font-black text-slate-900 dark:text-white mt-0.5">The {selectedYear} Retrospective</h3>
-          </div>
-
-          {/* Wrapped Card 1: Total Volume */}
-          <div className="p-6 rounded-[32px] bg-gradient-to-tr from-purple-100 dark:from-purple-900/60 via-purple-50 dark:via-slate-900 to-indigo-100 dark:to-indigo-900/40 border border-purple-200 dark:border-purple-500/30 text-center relative overflow-hidden">
-            <Trophy size={36} className="mx-auto text-amber-500 dark:text-amber-300 mb-2" />
-            <h4 className="text-xs font-bold text-purple-700 dark:text-purple-200 uppercase tracking-wider">Total Managed</h4>
-            <p className="text-4xl font-black text-slate-900 dark:text-white mt-1">{formatINR(review.totalSpent)}</p>
-            <p className="text-xs text-purple-900/80 dark:text-purple-200/80 mt-2 font-medium">
-              Over <strong className="text-slate-900 dark:text-white font-bold">{review.totalTransactions}</strong> expenses tracked conscientiously.
-            </p>
-          </div>
-
-          {/* Wrapped Card 2: Unnecessary Spending Badge */}
-          <div className="p-6 rounded-[32px] bg-gradient-to-tr from-rose-50 dark:from-rose-950 via-white dark:via-slate-900 to-rose-50/50 dark:to-slate-950 border border-rose-200 dark:border-rose-500/30 relative overflow-hidden">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="p-2 rounded-xl bg-rose-500/20 text-rose-600 dark:text-rose-400">
-                <AlertTriangle size={18} />
+          {/* Collector Ticket Pass */}
+          <div className="rounded-[28px] overflow-hidden atelier-vault text-[#F5F4F0]">
+            {/* Top Acid-Lime Header Band */}
+            <div className="bg-[#C8FF2E] text-[#0A0A0C] px-5 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-1.5 font-mono text-[10px] font-extrabold uppercase tracking-widest">
+                <Sparkles size={13} strokeWidth={2.6} />
+                <span>PENNYWISE WRAPPED PASS</span>
               </div>
-              <h4 className="text-xs font-extrabold text-rose-600 dark:text-rose-300 uppercase tracking-wider">The Waste Leak</h4>
+              <span className="font-mono text-[10px] font-extrabold">ED. {selectedYear}</span>
             </div>
 
-            <div className="mt-2">
-              <p className="text-3xl font-black text-rose-600 dark:text-rose-400">{formatINR(review.unnecessarySpent)}</p>
-              <p className="text-xs text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed font-medium">
-                You spent <span className="font-black text-rose-600 dark:text-rose-300">{review.wastePercentage}%</span> on avoidable impulse or extra purchases.
+            <div className="p-6 text-center">
+              <div className="w-12 h-12 rounded-2xl bg-[#FFB830]/15 border border-[#FFB830]/35 text-[#FFB830] flex items-center justify-center mx-auto mb-3">
+                <Trophy size={24} />
+              </div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#8E8E98] block">
+                ANNUAL VOLUME MANAGED
+              </span>
+              <p className="font-display text-4xl font-extrabold text-[#F5F4F0] tabular-nums mt-1.5">
+                {formatINR(review.totalSpent)}
+              </p>
+              <p className="font-mono text-[11px] text-[#A2A2AE] mt-2">
+                ACROSS <strong className="text-[#C8FF2E]">{review.totalTransactions || 0}</strong> VERIFIED ENTRIES
               </p>
             </div>
 
-            {/* Compounding wealth insight */}
-            <div className="mt-4 p-3.5 bg-slate-50 dark:bg-slate-950/80 rounded-2xl border border-rose-200 dark:border-rose-500/20 text-xs">
-              <span className="text-slate-500 dark:text-slate-400 block text-[11px] font-semibold">If you invested this at 12% mutual funds:</span>
-              <span className="text-lg font-black text-emerald-600 dark:text-emerald-400 mt-0.5 block">
-                You would have {formatINR(review.potentialSavingsIfInvested)}!
-              </span>
+            {/* Perforated Stub Section */}
+            <div className="mx-5 pt-4 pb-5 ticket-divider">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-1.5 font-mono text-[10px] font-extrabold uppercase text-[#FF7A6E]">
+                  <AlertTriangle size={13} />
+                  <span>AVOIDABLE LEAK REPORT</span>
+                </div>
+                <span className="font-mono text-[10px] font-extrabold text-[#FF7A6E]">
+                  {review.wastePercentage || 0}%
+                </span>
+              </div>
+              <p className="font-mono text-2xl font-extrabold text-[#FF7A6E] tabular-nums">
+                {formatINR(review.unnecessarySpent)}
+              </p>
+
+              <div className="mt-3 p-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08]">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-[#8E8E98] block">
+                  IF INVESTED AT 12% INDEX RETURN
+                </span>
+                <span className="font-mono text-base font-extrabold text-[#C8FF2E] tabular-nums block mt-0.5">
+                  {formatINR(review.potentialSavingsIfInvested)} POTENTIAL
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Wrapped Card 3: Champions - Peak & Lowest Month */}
+          {/* Peak vs Economical Duel Cards */}
           <div className="grid grid-cols-2 gap-2.5">
-            <div className="p-4 rounded-2xl glass-card-interactive border border-amber-300 dark:border-amber-500/25 text-center">
-              <span className="text-[10px] uppercase font-bold text-amber-600 dark:text-amber-400 block mb-1">Peak Spend Month</span>
-              <p className="text-base font-black text-slate-900 dark:text-white">{review.highestMonth?.name || 'N/A'}</p>
-              <p className="text-xs font-black text-amber-600 dark:text-amber-400 mt-0.5">
+            <div className="p-4 rounded-2xl atelier-card border-t-[3px] border-t-[#FFB830] text-center">
+              <span className="font-mono text-[9px] uppercase tracking-wider font-extrabold text-[#9A6300] dark:text-[#FFB830] block mb-1">
+                PEAK MONTH
+              </span>
+              <p className="font-display text-lg font-extrabold text-[#141418] dark:text-[#F5F4F0]">
+                {review.highestMonth?.name || 'N/A'}
+              </p>
+              <p className="font-mono text-xs font-extrabold text-[#9A6300] dark:text-[#FFB830] tabular-nums mt-0.5">
                 {review.highestMonth ? formatINR(review.highestMonth.amount) : '₹0'}
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl glass-card-interactive border border-emerald-300 dark:border-emerald-500/25 text-center">
-              <span className="text-[10px] uppercase font-bold text-emerald-600 dark:text-emerald-400 block mb-1">Most Economical</span>
-              <p className="text-base font-black text-slate-900 dark:text-white">{review.lowestMonth?.name || 'N/A'}</p>
-              <p className="text-xs font-black text-emerald-600 dark:text-emerald-400 mt-0.5">
+            <div className="p-4 rounded-2xl atelier-card border-t-[3px] border-t-[#22C55E] text-center">
+              <span className="font-mono text-[9px] uppercase tracking-wider font-extrabold text-[#16794B] dark:text-[#C8FF2E] block mb-1">
+                MOST FRUGAL
+              </span>
+              <p className="font-display text-lg font-extrabold text-[#141418] dark:text-[#F5F4F0]">
+                {review.lowestMonth?.name || 'N/A'}
+              </p>
+              <p className="font-mono text-xs font-extrabold text-[#16794B] dark:text-[#C8FF2E] tabular-nums mt-0.5">
                 {review.lowestMonth ? formatINR(review.lowestMonth.amount) : '₹0'}
               </p>
             </div>
           </div>
 
-          {/* Celebrate Button */}
+          {/* Confetti Action Key */}
           <button
             onClick={triggerConfetti}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 text-slate-950 font-black text-sm shadow-xl shadow-emerald-500/25 active:scale-95 transition-all flex items-center justify-center gap-2"
+            className="w-full py-4 rounded-2xl shutter-key font-mono font-extrabold text-xs uppercase tracking-widest flex items-center justify-center gap-2"
           >
-            <Sparkles size={18} strokeWidth={2.5} />
-            <span>Celebrate Financial Milestones 🎉</span>
+            <Sparkles size={16} strokeWidth={2.6} />
+            <span>Celebrate {selectedYear} Milestone</span>
           </button>
         </div>
       )}

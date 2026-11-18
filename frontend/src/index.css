@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,20 +28,36 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Signature Tactile Dot-Grid Canvases */
 html.dark body {
-  background-color: #030712;
-  color: #f8fafc;
+  background-color: #0A0A0C;
+  color: #F5F4F0;
+  background-image:
+    radial-gradient(rgba(200, 255, 46, 0.055) 1px, transparent 1px),
+    radial-gradient(ellipse 80% 45% at 50% -10%, rgba(200, 255, 46, 0.08), transparent 70%);
+  background-size: 22px 22px, 100% 100%;
+  background-attachment: fixed;
 }
 
 html.light body {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #F3EFE6;
+  color: #141418;
+  background-image:
+    radial-gradient(rgba(20, 20, 24, 0.09) 1px, transparent 1px),
+    radial-gradient(ellipse 85% 40% at 50% -10%, rgba(200, 255, 46, 0.16), transparent 65%);
+  background-size: 22px 22px, 100% 100%;
+  background-attachment: fixed;
 }
 
-/* Custom Scrollbars */
+/* Tabular numerals helper */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hide scrollbars cleanly */
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
@@ -57,67 +71,210 @@ html.light body {
   scrollbar-width: none;
 }
 
-/* Glass & Glow - Dark Mode Default */
-.glass-surface {
-  background: rgba(17, 24, 39, 0.75);
+/* Atelier Header Glass */
+.atelier-header {
+  background: rgba(10, 10, 12, 0.84);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.glass-surface-active {
-  background: rgba(31, 41, 55, 0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+html.light .atelier-header {
+  background: rgba(243, 239, 230, 0.86);
+  border-bottom: 1px solid rgba(20, 20, 24, 0.12);
 }
 
-.glass-card-interactive {
-  background: linear-gradient(145deg, rgba(31, 41, 55, 0.6) 0%, rgba(17, 24, 39, 0.8) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Atelier Hardware Card */
+.atelier-card {
+  background: #131317;
+  border: 1px solid rgba(255, 255, 255, 0.085);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 12px 32px -16px rgba(0, 0, 0, 0.85);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+html.light .atelier-card {
+  background: #FFFDF8;
+  border: 1.5px solid rgba(20, 20, 24, 0.12);
+  box-shadow: 0 3px 0 rgba(20, 20, 24, 0.07), 0 10px 24px -14px rgba(20, 20, 24, 0.14);
+}
+
+/* Interactive Ledger Row */
+.atelier-row {
+  background: #131317;
   border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.glass-card-interactive:active {
+.atelier-row:hover {
+  border-color: rgba(200, 255, 46, 0.28);
+  background: #17171D;
+}
+
+.atelier-row:active {
   transform: scale(0.985);
 }
 
-/* Glass & Glow - Light Mode Overrides */
-html.light .glass-surface {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.06);
+html.light .atelier-row {
+  background: #FFFDF8;
+  border: 1.5px solid rgba(20, 20, 24, 0.11);
+  box-shadow: 0 2px 0 rgba(20, 20, 24, 0.06);
 }
 
-html.light .glass-surface-active {
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(203, 213, 225, 0.9);
-  box-shadow: 0 12px 32px -8px rgba(15, 23, 42, 0.12);
+html.light .atelier-row:hover {
+  border-color: rgba(20, 20, 24, 0.35);
 }
 
-html.light .glass-card-interactive {
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.05);
+/* Obsidian Hero Vault Plate — ALWAYS high-contrast obsidian in BOTH themes! */
+.atelier-vault {
+  background:
+    radial-gradient(circle at 92% 8%, rgba(200, 255, 46, 0.16), transparent 46%),
+    radial-gradient(circle at 8% 95%, rgba(255, 77, 61, 0.1), transparent 48%),
+    linear-gradient(155deg, #17171E 0%, #0E0E12 58%, #131418 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 24px 48px -20px rgba(0, 0, 0, 0.75);
 }
 
-/* Neon Glow Accents */
-.glow-emerald {
-  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+html.light .atelier-vault {
+  border: 1.5px solid #141418;
+  box-shadow:
+    0 6px 0 #141418,
+    0 22px 42px -18px rgba(20, 20, 24, 0.35);
 }
 
-.glow-rose {
-  box-shadow: 0 0 25px -5px rgba(244, 63, 94, 0.35);
+/* Vermilion Vault Variant (Waste Radar) */
+.atelier-vault-vermilion {
+  background:
+    radial-gradient(circle at 92% 10%, rgba(255, 77, 61, 0.24), transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(255, 184, 48, 0.1), transparent 45%),
+    linear-gradient(155deg, #1B1214 0%, #100B0C 60%, #171113 100%);
+  border: 1px solid rgba(255, 77, 61, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 122, 110, 0.15),
+    0 24px 48px -20px rgba(120, 18, 12, 0.55);
 }
 
-.glow-indigo {
-  box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.35);
+html.light .atelier-vault-vermilion {
+  border: 1.5px solid #141418;
+  box-shadow:
+    0 6px 0 #E03424,
+    0 20px 38px -16px rgba(224, 52, 36, 0.3);
 }
 
-/* Bottom Sheet Animation */
+/* Cobalt Vault Variant (Yearly Dossier) */
+.atelier-vault-cobalt {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(124, 124, 255, 0.22), transparent 48%),
+    radial-gradient(circle at 12% 92%, rgba(200, 255, 46, 0.12), transparent 45%),
+    linear-gradient(155deg, #141422 0%, #0D0D14 60%, #13131C 100%);
+  border: 1px solid rgba(124, 124, 255, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 24px 48px -20px rgba(20, 20, 60, 0.65);
+}
+
+html.light .atelier-vault-cobalt {
+  border: 1.5px solid #141418;
+  box-shadow:
+    0 6px 0 #141418,
+    0 22px 42px -18px rgba(20, 20, 24, 0.32);
+}
+
+/* Tactile Floating Dock */
+.atelier-dock {
+  background: rgba(16, 16, 20, 0.92);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 44px -10px rgba(0, 0, 0, 0.85);
+}
+
+html.light .atelier-dock {
+  background: rgba(20, 20, 24, 0.95);
+  border: 1.5px solid #141418;
+  box-shadow:
+    0 6px 0 rgba(20, 20, 24, 0.22),
+    0 18px 36px -10px rgba(20, 20, 24, 0.35);
+}
+
+/* Acid Lime Tactile Shutter Key */
+.shutter-key {
+  background: #C8FF2E;
+  color: #0A0A0C;
+  border: 2px solid #0A0A0C;
+  box-shadow: 0 4px 0 #7AA600, 0 10px 24px -4px rgba(200, 255, 46, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.shutter-key:active {
+  transform: translateY(3px) scale(0.96);
+  box-shadow: 0 1px 0 #7AA600, 0 4px 12px -4px rgba(200, 255, 46, 0.4);
+}
+
+/* Subtle diagonal hazard stripe overlay for Leak Alert cards */
+.hazard-stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 77, 61, 0.08),
+    rgba(255, 77, 61, 0.08) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+/* Perforated Ticket Divider */
+.ticket-divider {
+  position: relative;
+  border-top: 1.5px dashed rgba(255, 255, 255, 0.14);
+}
+
+html.light .ticket-divider-light {
+  border-top: 1.5px dashed rgba(20, 20, 24, 0.16);
+}
+
+/* Custom Range Slider (Atelier Precision Fader) */
+.atelier-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 999px;
+  outline: none;
+}
+
+.atelier-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: #C8FF2E;
+  border: 2.5px solid #0A0A0C;
+  box-shadow: 0 2px 0 #0A0A0C, 0 4px 12px rgba(200, 255, 46, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.atelier-slider::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+}
+
+.atelier-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: #C8FF2E;
+  border: 2.5px solid #0A0A0C;
+  box-shadow: 0 2px 0 #0A0A0C;
+  cursor: pointer;
+}
+
+/* Animations */
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -130,14 +287,20 @@ html.light .glass-card-interactive {
 }
 
 .animate-sheet {
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.97); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

@@ -32,8 +32,12 @@ export default function CategoryIcon({ category, size = 18, className = '' }) {
 
   return (
     <div
-      className={`flex items-center justify-center rounded-xl p-2.5 transition-all ${meta.bg} ${meta.text} ${className}`}
-      style={{ color: meta.color }}
+      className={`flex items-center justify-center rounded-xl p-2.5 border transition-all ${className}`}
+      style={{
+        color: meta.color,
+        backgroundColor: `${meta.color}18`,
+        borderColor: `${meta.color}33`,
+      }}
     >
       <IconComponent size={size} strokeWidth={2.2} />
     </div>
